@@ -246,7 +246,7 @@
     }
     .card li:before {
       content: "✓ ";
-      color: #22c55e;
+      color: var(--color-gold);
       font-weight: bold;
       margin-left: 10px;
     }
@@ -289,6 +289,27 @@
     }
     .detail-section li {
       margin: 5px 0;
+    }
+    /* Gold bullet points */
+    .gold-bullet-list {
+      list-style: none;
+      padding: 0 20px 0 0;
+      margin: 15px 0;
+    }
+    .gold-bullet-list li {
+      color: rgba(255,255,255,.85);
+      margin-bottom: 12px;
+      line-height: 1.7;
+      padding-right: 15px;
+      position: relative;
+    }
+    .gold-bullet-list li:before {
+      content: "✓";
+      position: absolute;
+      right: 0;
+      color: var(--color-gold);
+      font-size: 1em;
+      font-weight: bold;
     }
     /* Print button */
     .print-button {
@@ -352,20 +373,16 @@
         <p class="text-sm text-white/50">قراءة مهنية للفروقات بين النماذج الثلاثة</p>
       </div>
     </section>
-    <!-- Navigation -->
-    <section class="mb-8 flex flex-wrap justify-center gap-2">
-      <a href="#overview" class="btn px-4 py-2 rounded-lg text-sm text-white/85">نظرة عامة</a>
-      <a href="#comparison" class="btn px-4 py-2 rounded-lg text-sm text-white/85">الجدول المقارن</a>
-      <a href="#details" class="btn px-4 py-2 rounded-lg text-sm text-white/85">التحليل التفصيلي</a>
-      <a href="#agreement" class="btn px-4 py-2 rounded-lg text-sm text-white/85">تنظيم العلاقة</a>
-    </section>
+
     <!-- Overview Section -->
     <section id="overview" class="mb-12">
       <h2 class="text-3xl mb-6 text-white/95">📌 نظرة عامة</h2>
       <div class="highlight-box">
-        <h4>الفرق الجوهري</h4>
-        <p class="text-white/80">
-          الفروقات بين مجلس (الإدارة/المديرين) والمجلس الاستشاري والمرشد ليست مجرد فروقات شكلية، بل هي فروقات جوهرية في <strong>المسؤولية القانونية</strong>، <strong>السلطة والقرار</strong>، <strong>الالتزام الزمني</strong>، و<strong>التعويضات</strong>.
+        <p class="text-white/80" style="line-height: 1.8; margin-bottom: 16px;">
+          في بيئة الأعمال، يكثر استخدام مصطلحات مثل <strong>مجلس الإدارة/ المديرين</strong> ، <strong>المجلس الاستشاري</strong>، و<strong>المرشد</strong> دون وضوح كافٍ للفروق الجوهرية بينها، أو متى يُستخدم كل نموذج بالشكل الصحيح.
+        </p>
+        <p class="text-white/80" style="line-height: 1.8;">
+          هذا المحتوى يقدّم قراءة مهنية مبسّطة تشرح طبيعة كل نموذج، وحدود دوره، وتوقيت استخدامه، لمساعدة أصحاب الشركات وصنّاع القرار على اختيار النموذج الأنسب لمرحلة شركتهم واحتياجاتها.
         </p>
       </div>
       <h3 class="text-2xl mb-6 mt-8 text-white/95">متى تختار كل نموذج؟</h3>
@@ -379,8 +396,7 @@
             <li>تجذب استثمارات مؤسسية</li>
             <li>عمليات معقدة ومتعددة</li>
           </ul>
-        <p style="margin-top:14px; color:rgba(255,255,255,.82);">إذا تبغى نسخة مصاغة على مقاس منشأتك (مختصرة وواضحة)، هذا من أكثر البنود اللي تفرق عمليًا.</p>
-      </div>
+        </div>
         <div class="card">
           <h4>💡 المجلس الاستشاري<br><span class="t-en">Advisory Board</span></h4>
           <ul>
@@ -405,7 +421,7 @@
     </section>
     <!-- Comparison Table Section -->
     <section id="comparison" class="mb-12">
-      <h2 class="text-3xl mb-6 text-white/95">📊 الجدول المقارن المختصر</h2>
+      <h2 class="text-3xl mb-6 text-white/95">📊 الجدول المقارن</h2>
       <div class="glass-strong rounded-2xl p-6 overflow-x-auto">
         <table>
           <thead>
@@ -483,11 +499,9 @@
     </section>
     <!-- Details Section -->
     <section id="details" class="mb-12">
-      <h2 class="text-3xl mb-6 text-white/95">📖 التحليل التفصيلي</h2>
 <div class="detail-section">
   <details class="glass rounded-xl p-4">
-    <summary class="cursor-pointer font-semibold text-white/90">📚 الإطار النظامي الكامل (للمختصين)</summary>
-    <p class="text-white/70 mt-2">للتفاصيل القانونية والتنظيمية الكاملة اضغط هنا</p>
+    <summary class="cursor-pointer font-semibold text-white/90" style="display: flex; align-items: center; gap: 8px;"><span style="color: var(--color-gold);">▼</span> المواد النظامية المعزّزة</summary>
     <div class="mt-4">
       <h5>1️⃣ نظام الشركات السعودي</h5>
       <ul>
@@ -510,36 +524,7 @@
     </div>
   </details>
 </div>
-      <h3 class="text-2xl mb-4 mt-8 text-white/95">1. الأساس القانوني</h3>
-<div class="detail-section">
 
-<ul>
-  <li><strong>تعريف الدور:</strong> إدارة الشركة وفق الإطار النظامي المعتمد.</li>
-  <li><strong>السلطة والقرار:</strong> قرارات ملزمة قانونًا.</li>
-  <li><strong>المسؤولية القانونية:</strong> مسؤولية تضامنية وفق الأنظمة ذات الصلة.</li>
-</ul>
-
-</div>
-<h3 class="text-2xl mb-4 mt-8 text-white/95">2. السلطة والقرار</h3>
-<div class="detail-section">
-
-<ul>
-  <li><strong>تعريف الدور:</strong> ممارسة صلاحيات الإدارة العليا.</li>
-  <li><strong>السلطة والقرار:</strong> ملزمة للإدارة التنفيذية.</li>
-  <li><strong>المسؤولية القانونية:</strong> مدنية وتنظيمية وقد تكون جنائية.</li>
-</ul>
-
-</div>
-<h3 class="text-2xl mb-4 mt-8 text-white/95">3. المسؤولية القانونية</h3>
-<div class="detail-section">
-
-<ul>
-  <li><strong>تعريف الدور:</strong> تحمل تبعات القرار.</li>
-  <li><strong>السلطة والقرار:</strong> وفق ما يقره المجلس.</li>
-  <li><strong>المسؤولية القانونية:</strong> تضامنية حسب الوقائع.</li>
-</ul>
-
-</div>
 </section>
     <!-- Examples Section -->
     <section id="examples" class="mb-12">
@@ -566,7 +551,7 @@
     ويشمل ذلك – على سبيل المثال لا الحصر – تنظيم:
   </p>
 
-  <ul>
+  <ul class="gold-bullet-list">
     <li>نطاق الدور (المسؤوليات والاختصاصات)</li>
     <li>مدة العلاقة (البداية، الانتهاء، وآلية التجديد)</li>
     <li>المقابل المالي (المكافآت والمزايا إن وجدت)</li>
@@ -582,8 +567,8 @@
       <h2 class="text-3xl mb-6 text-white/95">🎯 الخلاصة</h2>
       <div class="highlight-box">
         <h4>الفروقات الجوهرية</h4>
-        <p class="text-white/80">الفروقات بين مجلس (الإدارة/المديرين) والمجلس الاستشاري ليست مجرد فروقات شكلية، بل هي <strong>فروقات جوهرية</strong> في:</p>
-        <ul style="margin: 10px 0 10px 20px; color: rgba(255,255,255,.80);">
+        <p class="text-white/80">الفروقات بين <strong>مجلس (الإدارة/المديرين)</strong> و<strong>المجلس الاستشاري</strong> و<strong>المرشد</strong> ليست مجرد فروقات شكلية، بل هي <strong>فروقات جوهرية</strong> في:</p>
+        <ul class="gold-bullet-list">
           <li>المسؤولية القانونية</li>
           <li>السلطة والقرار</li>
           <li>الالتزام الزمني</li>
@@ -596,16 +581,16 @@
       </div>
     </section>
     <!-- Footer -->
-    <section class="mt-12 pt-8 border-t border-white/10">
+    <section class="mt-8 pt-6 border-t border-white/10">
       <div class="text-center">
         <p class="text-white/60 text-sm mb-6">
-          آخر تحديث: شعبان 1447 - يناير 2026 | جميع الحقوق محفوظة
-        </p>
+          </p>
         <!-- Contact Section -->
         <div class="glass-strong rounded-2xl p-6 mb-6">
           <div class="text-center">
-            <div class="flex items-center justify-center gap-4 mb-4 flex-wrap">
-              <span class="font-semibold text-white/85">للتواصل:</span>
+            <p class="text-white/85 font-semibold text-lg mb-2">نايف المحمدي</p>
+            <p class="text-white/70 text-sm mb-4">Naif Almohammdi</p>
+            <div class="flex items-center justify-center gap-4 flex-wrap">
               <a href="https://x.com/almohammdin" target="_blank" rel="noopener" class="hover:text-blue-300 transition" title="تويتر">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.514l-5.106-6.694L2.896 21.75H.588l7.753-8.835L.461 2.25h6.679l4.632 6.132 5.484-6.132zM17.15 19.128h1.83L6.122 4.093H4.192l13.958 15.035z"/>
@@ -621,21 +606,19 @@
       <path d="M16.882 7.842a4.882 4.882 0 0 0 -9.764 0c0 4.273 -.213 6.409 -4.118 8.118c2 .882 2 .882 3 3c3 0 4 2 6 2s3 -2 6 -2c1 -2.118 1 -2.118 3 -3c-3.906 -1.709 -4.118 -3.845 -4.118 -8.118m-13.882 8.119c4 -2.118 4 -4.118 1 -7.118m17 7.118c-4 -2.118 -4 -4.118 -1 -7.118" />
     </svg></a>
             </div>
-            <p class="text-white/85 font-semibold">إعداد: نايف المحمدي</p>
           </div>
         </div>
-        <button class="print-button" onclick="window.print()">🖨️ طباعة الصفحة</button>
       </div>
     </section>
     <!-- Consultation CTA Section -->
-    <section class="mt-10 mb-6">
+    <section class="mt-8 mb-6">
       <div class="relative overflow-hidden rounded-2xl p-4 sm:p-6">
-        <!-- Gradient Background -->
-        <div class="absolute inset-0 bg-gradient-to-r from-white/6 via-white/4 to-white/6"></div>
-        <div class="absolute inset-0 backdrop-blur-xl"></div>
-        <!-- Animated Background Elements -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -mr-48 -mt-48"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl -ml-48 -mb-48"></div>
+        <!-- Gradient Background with Golden Harmony -->
+        <div class="absolute inset-0 bg-gradient-to-r from-white/5 via-white/3 to-white/5"></div>
+        <div class="absolute inset-0 backdrop-blur-sm" style="background: linear-gradient(135deg, rgba(201,162,77,.08) 0%, rgba(189,40,46,.06) 50%, rgba(201,162,77,.08) 100%);"></div>
+        <!-- Animated Background Elements - Harmonized with Golden Ratio -->
+        <div class="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl -mr-48 -mt-48" style="background: rgba(201,162,77,.08);"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl -ml-48 -mb-48" style="background: rgba(189,40,46,.06);"></div>
         <!-- Content -->
         <div class="relative z-10">
           <div class="max-w-5xl mx-auto">
@@ -681,24 +664,28 @@
             <!-- Discount Banner & CTA Button Grid - 2 columns (same width as 4-col grid) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
               <!-- Discount Banner -->
-              <div class="p-3 rounded-lg discount-box flex items-center justify-center" style="border:1px solid var(--color-gold); font-size:1.05em;">
+              <div class="p-4 rounded-lg flex items-center justify-center" style="border:1.5px solid var(--color-gold); background: linear-gradient(135deg, rgba(201,162,77,.12) 0%, rgba(201,162,77,.08) 100%); font-size:1.1em; text-align:center;">
                 <div class="flex items-center justify-center gap-2 flex-wrap">
                   <span class="text-2xl">🎁</span>
                   <div class="text-center">
-                    <p class="text-white font-bold text-sm">أول استشارة لك بخصم <span class="badge text-base">50%</span></p>
-                    <p class="text-white/80 text-xs mt-1">استخدم الكود: <span class="font-mono code px-2 py-0.5 rounded font-bold text-sm">T2</span></p>
+                    <p class="text-white font-bold text-sm">أول استشارة لك بخصم <span class="badge text-base" style="color: var(--color-gold);">50%</span></p>
+                    <p class="text-white/80 text-xs mt-1">استخدم الكود: <span class="font-mono code px-2 py-0.5 rounded font-bold text-sm" style="color: var(--color-gold); border: 1px solid var(--color-gold); background: rgba(0,0,0,.3);">T2</span></p>
                   </div>
                   <span class="text-2xl">⭐</span>
                 </div>
               </div>
               <!-- CTA Button -->
-              <a href="https://rekaz.io/nayf-almhmdy/reservation/diag-session" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 px-5 py-3 rounded-lg cta-btn-soft font-bold" style="border:1px solid var(--color-gold); font-size:1.05em;">
+              <a href="https://rekaz.io/nayf-almhmdy/reservation/diag-session" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 px-5 py-4 rounded-lg font-bold transition-all hover:shadow-lg" style="border:1.5px solid var(--color-gold); background: linear-gradient(135deg, rgba(201,162,77,.12) 0%, rgba(201,162,77,.08) 100%); font-size:1.1em; color: var(--color-gold);">
                 <span class="text-lg">📅</span>
                 احجز الآن
               </a>
             </div>        </div>
         </div>
       </div>
+    </section>
+    <!-- Footer with reduced margin -->
+    <section class="mt-6 pt-4 border-t border-white/10">
+      <p style="text-align:center; font-size:.85em; opacity:.6; margin-top:12px;">آخر تحديث: شعبان 1447 - يناير 2026 | جميع الحقوق محفوظة</p>
     </section>
   </main>
 </body>
