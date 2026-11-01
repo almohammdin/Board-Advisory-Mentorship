@@ -170,7 +170,8 @@ h1{font-size:31px;line-height:1.35}.hero .lead{font-size:16px}
 <a class="ref" href="https://www.ifc.org/en/insights-reports/2010/sme-governance-guidebook" target="_blank" rel="noopener"><strong>دليل حوكمة المنشآت الصغيرة والمتوسطة ↗</strong><div class="ref-logo"><img src="https://www.ifc.org/content/dam/ifc/corporate/logo/IFC-Logo.svg" alt="شعار مؤسسة التمويل الدولية IFC" width="140" height="36" loading="lazy" decoding="async"></div><span>IFC · توصيات مرتبطة بمرحلة النمو وخطوات عملية للتطوير.</span></a>
 <a class="ref" href="https://www.ifc.org/en/what-we-do/sector-expertise/corporate-governance/cg-methodology-tools" target="_blank" rel="noopener"><strong>أدوات تقييم الحوكمة ↗</strong><div class="ref-logo"><img src="https://www.ifc.org/content/dam/ifc/corporate/logo/IFC-Logo.svg" alt="شعار مؤسسة التمويل الدولية IFC" width="140" height="36" loading="lazy" decoding="async"></div><span>IFC · أطر متدرجة تراعي نوع المنشأة والملكية.</span></a>
 <a class="ref" href="https://www.theiia.org/en/standards/2024-standards/global-internal-audit-standards/" target="_blank" rel="noopener"><strong>المعايير العالمية للمراجعة الداخلية ↗</strong><div class="ref-logo ref-logo-dark"><img src="https://www.theiia.org/contentassets/971fd3ca5fb04a7f8a61301cc37c08a9/footer-logo.svg" alt="شعار معهد المراجعين الداخليين IIA" width="140" height="36" loading="lazy" decoding="async"></div><span>The IIA · مرجع مهني لاستقلال الوظيفة والإشراف على أعمالها.</span></a>
-</div><p class="meta">إصدار الأداة 3.0 · <bdi dir="ltr">01-11-2026</bdi> · المصادر للاستدلال المهني، إعداد حتى لحلول الأعمال.</p></div></section>
+<a class="ref" href="https://ncnp.gov.sa/ar/regulations/قواعد-حوكمة-الجمعيات-والمؤسسات-الأهلية-0" target="_blank" rel="noopener"><strong>قواعد حوكمة الجمعيات والمؤسسات الأهلية ↗</strong><div class="ref-logo"><img src="https://ncnp.gov.sa/themes/custom/ncnp_dga/images/logo-2x.webp" alt="شعار المركز الوطني لتنمية القطاع غير الربحي" width="140" height="36" loading="lazy" decoding="async"></div><span>المركز الوطني لتنمية القطاع غير الربحي · النسخة الثانية المنشورة في 2026.</span></a>
+</div><p class="meta">إصدار الأداة 3.1 · <bdi dir="ltr">01-11-2026</bdi> · المصادر للاستدلال المهني، إعداد حتى لحلول الأعمال.</p></div></section>
 </main>
 <footer class="footer footer-slim"><div class="wrap footer-strip"><a class="footer-brand" href="https://almohammdin.github.io/services/" aria-label="حتى لحلول الأعمال"><svg class="wordmark" viewBox="134 149 746 269" role="img" aria-label="حتى لحلول الأعمال"><image href="https://almohammdin.github.io/hatta-brand-guide/assets/hatta-logo.webp" width="1000" height="526"/></svg></a><div class="author"><span>أعدت بواسطة</span><img class="signature" src="https://almohammdin.github.io/hatta-brand-guide/assets/naif-signature.webp" alt="نايف المحمدي" width="110" height="55"></div><div class="socials">
 <a href="https://x.com/almohammdin" target="_blank" rel="noopener" aria-label="حساب نايف على X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
@@ -189,7 +190,8 @@ h1{font-size:31px;line-height:1.35}.hero .lead{font-size:16px}
 ["simplified","شركة مساهمة مبسطة"],
           ["listed","شركة مدرجة في السوق الرئيسية"],
 ["nomu","شركة مدرجة في السوق الموازية"],
-          ["nonprofit","جمعية أو مؤسسة أهلية"],
+          ["nonprofit","جمعية أهلية"],
+["foundation","مؤسسة أهلية"],
 ["other","شكل آخر"]
         ]
       },
@@ -320,19 +322,63 @@ h1{font-size:31px;line-height:1.35}.hero .lead{font-size:16px}
 
 
 
+
+const isNonprofit=a=>["nonprofit","foundation"].includes(a.legal);
+function questionsFor(a){
+ if(!isNonprofit(a))return questions.filter(q=>!q.show||q.show(a));
+ const foundation=a.legal==="foundation", council=foundation?"مجلس الأمناء":"مجلس الإدارة";
+ const custom={
+ regulated:{axis:"الإشراف",text:"ما وضع الإشراف الفني على الجهة؟",help:"المرجع التنظيمي هو المركز الوطني لتنمية القطاع غير الربحي، ويُراجع الإشراف الفني بحسب النشاط والترخيص.",options:[["known","الجهة المشرفة فنياً محددة في الترخيص"],["checking","نعمل على تحديد الجهة ومتطلباتها"],["unclear","نحتاج مراجعة بيانات الترخيص"]]},
+ ownership:{axis:"الحوكمة",text:foundation?"ما مدى وضوح صلاحيات المؤسسين ومجلس الأمناء؟":"كيف تعمل الجمعية العمومية حالياً؟",help:foundation?"تُراجع الصلاحيات وفق اللائحة الأساسية للمؤسسة.":"يشمل ذلك العضوية والاجتماعات والقرارات ومتابعة تنفيذها.",options:[["clear","الأدوار والإجراءات موثقة ومفعلة"],["partial","موثقة وتحتاج تفعيلًا أكبر"],["gap","تحتاج تنظيمًا وتوثيقًا"],["forming","الجهة في مرحلة التأسيس"]]},
+ stage:{text:"ما المرحلة الأقرب للجهة؟",help:"اختر المرحلة التي تصف برامج الجهة وخدماتها.",options:[["early","تأسيس وبناء الفريق"],["growth","توسع في البرامج والخدمات"],["mature","تشغيل مستقر وبرامج متعددة"],["restructure","إعادة تنظيم أو تطوير الاستدامة"]]},
+ complexity:{help:"يشمل البرامج والفروع والمستفيدين والأنشطة والتقارير.",options:[["low","برامج محدودة وواضحة"],["medium","برامج متنامية"],["high","فروع وبرامج متعددة"],["group","جهات تابعة أو استثمارات متعددة"]]},
+ board:{text:"ما وضع "+council+" حالياً؟",help:"نراجع اكتمال التشكيل وفاعلية المجلس واللجان.",options:[["forming","جارٍ استكمال التشكيل"],["informal","مجلس قائم يحتاج تنظيم أعماله"],["formal",council+" منتظم"],["committees","مجلس منتظم ولديه لجان"]]},
+ financial:{help:"يشمل التبرعات والمنح والمصروفات والتقارير وملاحظات المراجع الخارجي.",options:[["low","تقارير منتظمة وموارد محدودة"],["medium","منح وبرامج تحتاج متابعة إضافية"],["high","موارد واستثمارات ومعاملات متعددة"],["issues","ملاحظات مالية متكررة"]]},
+ people:{text:"ما احتياج الجهة في التعيينات والمكافآت؟",help:"يشمل القيادات والموظفين ومعايير الاختيار وتعارض المصالح.",options:[["simple","معايير واضحة واحتياج محدود"],["growing","توظيف وتوسع في الفريق"],["complex","معايير الاختيار والمكافآت تحتاج تطويرًا"],["conflict","تعارض مصالح يحتاج معالجة"]]},
+ advice:{text:"ما الدعم الخارجي الذي تحتاجه الجهة؟",help:"اختر الاحتياج الأقرب لأعمال الجهة.",options:[["none","ترتيب العمل الداخلي"],["specialist","معالجة ملف حوكمة أو موارد أو تشغيل"],["advisory","مشورة مستمرة لتطوير البرامج والاستدامة"],["mentor","تطوير مهارات القيادة"]]}
+ };
+ const result=questions.filter(q=>!["familyRules","familyTransition"].includes(q.id)).map(q=>({...q,...custom[q.id]}));
+ result.splice(result.findIndex(q=>q.id==="board")+1,0,{id:"npCommittees",axis:"اللجان",text:"ما وضع لجان المجلس؟",help:foundation?"راجع اللجان المناسبة وفق اللائحة الأساسية والقواعد المنطبقة.":"راجع لجنتي المراجعة والترشيحات والمكافآت وفق قواعد المركز.",options:[["both","لجنتا المراجعة والترشيحات والمكافآت قائمتان"],["audit","لجنة المراجعة قائمة"],["people","لجنة الترشيحات والمكافآت قائمة"],["pending","تشكيل اللجان أو تفعيلها قيد العمل"]]});
+ return result;
+}
+function evaluateNonprofit(a){
+ const f=a.legal==="foundation", council=f?"مجلس الأمناء":"مجلس الإدارة", recs=[];
+ const add=(key,title,reason,action,source="ncnp",priority="أولوية حالية")=>recs.push({key,title,reason,action,source,priority});
+ add("scope","مراجعة المتطلبات والإشراف",a.regulated==="known"?"الإشراف الفني محدد.":"بيانات الإشراف تحتاج مراجعة.","راجع الترخيص واللائحة الأساسية ومتطلبات المركز الوطني لتنمية القطاع غير الربحي والجهة المشرفة فنياً.","ncnp","تحقق أولا");
+ add("board","تنظيم عمل "+council,a.board==="forming"?"تشكيل المجلس قيد العمل.":"لدى الجهة مجلس قائم.","راجع التشكيل والصلاحيات، وجهز جدول الاجتماعات ومتابعة القرارات.");
+ add("governance",f?"توضيح صلاحيات المؤسسين والمجلس":"تفعيل الجمعية العمومية",a.ownership==="clear"?"الإجراءات موثقة ومفعلة.":"ترتيبات الحوكمة تحتاج متابعة.",f?"طابق الصلاحيات مع اللائحة الأساسية.":"نظم العضوية والاجتماعات والانتخابات ومتابعة قرارات الجمعية العمومية.");
+ if(!f){
+ add("auditCommittee","مراجعة لجنة المراجعة",["both","audit"].includes(a.npCommittees)?"اللجنة قائمة.":"تشكيل لجنة المراجعة يحتاج استكمالًا.","راجع تشكيلها واختصاصاتها وفق المادة 30 من اللائحة التنفيذية وقواعد المركز.");
+ add("people","مراجعة لجنة الترشيحات والمكافآت",["both","people"].includes(a.npCommittees)?"اللجنة قائمة.":"تشكيل اللجنة يحتاج استكمالًا.","راجع التشكيل والعمل وفق قواعد المركز.","ncnpRules");
+ }else add("committees","مراجعة احتياج اللجان","تم تقييم وضع اللجان.","حدد اللجان وصلاحياتها وفق اللائحة الأساسية والمتطلبات المنطبقة.");
+ add("controls","متابعة الأموال والتقارير",a.financial==="issues"?"توجد ملاحظات مالية.":"تحتاج الموارد إلى متابعة منتظمة.","تابع الميزانية والتقارير وملاحظات المراجع الخارجي وصلاحيات الصرف.");
+ if(["high","issues"].includes(a.financial)||["high","group"].includes(a.complexity)||a.audit==="unclear")
+ add("internalAudit","تطوير ترتيبات المراجعة الداخلية","مستوى المخاطر أو وضع المراجعة يستدعي المتابعة.","قيّم الموارد ونطاق العمل والخطة المبنية على المخاطر والارتباط الوظيفي.","iia");
+ if(["soon","urgent","planning"].includes(a.succession))add("succession","تجهيز البدائل القيادية","أشرت إلى احتياج للتعاقب.","حدد الأدوار الحرجة وبدائلها وخطة تسليم العمل.");
+ if(a.people!=="simple")add("appointments","تنظيم التعيينات وتعارض المصالح","أشرت إلى احتياج في شؤون الفريق.","راجع معايير الاختيار والمكافآت والإفصاح عن المصالح.","ncnpRules");
+ if(a.advice!=="none"){
+ const m={specialist:["advisor","مستشار متخصص","حدد الملف والمخرجات والمدة."],advisory:["advisory","مشورة دورية للمجلس","حدد الخبرات المطلوبة وآلية رفع المقترحات للمجلس صاحب الصلاحية."],mentor:["mentor","إرشاد قيادي","حدد أهداف التطوير والجلسات ومؤشرات التقدم."]}[a.advice];
+ if(m)add(m[0],m[1],"اخترت الاستعانة بخبرة خارجية.",m[2],"ncnp","خطوة تالية");
+ }
+ return recs;
+}
+
 const SOURCES={
+ ncnp:{name:"اللائحة التنفيذية للجمعيات والمؤسسات الأهلية",url:"https://www.uqn.gov.sa/decisions-and-regulations/4000284"},
+ ncnpRules:{name:"قواعد حوكمة الجمعيات والمؤسسات الأهلية",url:"https://ncnp.gov.sa/ar/regulations/قواعد-حوكمة-الجمعيات-والمؤسسات-الأهلية-0"},
  mc:{name:"نظام الشركات",url:"https://mc.gov.sa/ar/Pages/NCS.aspx"},
  cma:{name:"لائحة حوكمة الشركات",url:"https://cma.gov.sa/RulesRegulations/Regulations/Pages/details.aspx?code=2"},
  ifc:{name:"دليل IFC لحوكمة المنشآت الصغيرة والمتوسطة",url:"https://www.ifc.org/en/insights-reports/2010/sme-governance-guidebook"},
  iia:{name:"المعايير العالمية للمراجعة الداخلية",url:"https://www.theiia.org/en/standards/2024-standards/global-internal-audit-standards/"}
 };
 function activeAnswers(input){
- const a={...input};
+ const allowed=questionsFor(input);const a=Object.fromEntries(allowed.filter(q=>q.options.some(o=>o[0]===input[q.id])).map(q=>[q.id,input[q.id]]));
  if(a.ownership!=="family"){delete a.familyRules;delete a.familyTransition}
  return a;
 }
 function evaluate(input){
  const a=activeAnswers(input),recs=[];
+ if(isNonprofit(a))return evaluateNonprofit(a);
  const listed=["listed","nomu"].includes(a.legal),special=a.regulated!=="none";
  const complex=["high","group"].includes(a.complexity),risk=["high","issues"].includes(a.financial);
  const board=["formal","committees"].includes(a.board);
@@ -378,7 +424,7 @@ function evaluate(input){
 
 const answers={}; let current=0, lastRecs=[];
 const $=id=>document.getElementById(id);
-const visibleQuestions=()=>questions.filter(q=>!q.show||q.show(answers));
+const visibleQuestions=()=>questionsFor(answers);
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function renderQuestion(focus=false){
  const visible=visibleQuestions();current=Math.max(0,Math.min(current,visible.length-1));const q=visible[current];
@@ -387,6 +433,7 @@ function renderQuestion(focus=false){
  $("progressBar").style.width=progress+"%";$("progressTrack").setAttribute("aria-valuenow",progress);
  $("question").innerHTML='<h3 id="questionTitle" tabindex="-1">'+escapeHtml(q.text)+'</h3><p class="help" id="questionHelp">'+escapeHtml(q.help)+'</p><div class="options" role="group" aria-labelledby="questionTitle" aria-describedby="questionHelp">'+q.options.map(([value,label])=>'<button type="button" class="option '+(answers[q.id]===value?'selected':'')+'" aria-pressed="'+(answers[q.id]===value)+'" data-value="'+value+'"><span class="dot" aria-hidden="true"></span><span>'+escapeHtml(label)+'</span></button>').join("")+'</div>';
  $("question").querySelectorAll(".option").forEach(btn=>btn.addEventListener("click",()=>{
+  if(q.id==="legal"&&answers.legal!==btn.dataset.value){Object.keys(answers).forEach(k=>delete answers[k])}
   answers[q.id]=btn.dataset.value;
   if(q.id==="ownership"&&answers.ownership!=="family"){delete answers.familyRules;delete answers.familyTransition}
   $("question").querySelectorAll(".option").forEach(b=>{const selected=b===btn;b.classList.toggle("selected",selected);b.setAttribute("aria-pressed",selected)});
@@ -422,7 +469,7 @@ $("restartBtn").addEventListener("click",()=>{if(!confirm("بدء تقييم ج�
 $("printBtn").addEventListener("click",()=>window.print());
 function reportHTML(){
  const date=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Riyadh"}).format(new Date());
- return '<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>بوصلة المجالس | تقرير التقييم</title><style>'+document.querySelector("style").textContent+' body{padding:25px}.report{max-width:900px;margin:auto}.report h1{font-size:34px}.report .rec{background:white;margin-top:15px}.report .wordmark{display:block;margin-bottom:25px}.report-answers{margin-top:30px}.report-answers p{font-size:15px;border-bottom:1px solid #ddd;padding:12px 0}@media print{body{padding:0}.report h1{font-size:25pt}}'+'</style><body><main class="report">'+document.querySelector(".wordmark").outerHTML+'<span class="eyebrow">حتى لحلول الأعمال · بوصلة المجالس</span><h1>تقرير احتياج المجلس واللجان والمشورة</h1><p>تاريخ التقرير: <bdi>'+date+'</bdi> · إصدار 3.0</p><p class="notice">تقدير أولي مبني على الإجابات. تعتمد الالتزامات بعد مراجعة الأنظمة واللوائح المنطبقة. يتضمن هذا الملف إجابات التقييم.</p>'+recMarkup(lastRecs)+'<section class="report-answers"><h2>الأسئلة والإجابات</h2>'+answerMarkup()+'</section><p class="notice">أعدت الأداة بواسطة نايف المحمدي · حتى لحلول الأعمال</p><p><a href="https://almohammdin.github.io/Board-Advisory-Mentorship/">فتح بوصلة المجالس</a></p></main></body></html>';
+ return '<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>بوصلة المجالس | تقرير التقييم</title><style>'+document.querySelector("style").textContent+' body{padding:25px}.report{max-width:900px;margin:auto}.report h1{font-size:34px}.report .rec{background:white;margin-top:15px}.report .wordmark{display:block;margin-bottom:25px}.report-answers{margin-top:30px}.report-answers p{font-size:15px;border-bottom:1px solid #ddd;padding:12px 0}@media print{body{padding:0}.report h1{font-size:25pt}}'+'</style><body><main class="report">'+document.querySelector(".wordmark").outerHTML+'<span class="eyebrow">حتى لحلول الأعمال · بوصلة المجالس</span><h1>تقرير احتياج المجلس واللجان والمشورة</h1><p>تاريخ التقرير: <bdi>'+date+'</bdi> · إصدار 3.1</p><p class="notice">تقدير أولي مبني على الإجابات. تعتمد الالتزامات بعد مراجعة الأنظمة واللوائح المنطبقة. يتضمن هذا الملف إجابات التقييم.</p>'+recMarkup(lastRecs)+'<section class="report-answers"><h2>الأسئلة والإجابات</h2>'+answerMarkup()+'</section><p class="notice">أعدت الأداة بواسطة نايف المحمدي · حتى لحلول الأعمال</p><p><a href="https://almohammdin.github.io/Board-Advisory-Mentorship/">فتح بوصلة المجالس</a></p></main></body></html>';
 }
 function downloadReport(){const blob=new Blob([reportHTML()],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="board-compass-report.html";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
 $("downloadBtn").addEventListener("click",()=>{downloadReport();$("exportStatus").textContent="تم تجهيز التقرير للتنزيل. يشمل الأسئلة والإجابات والتوصيات."});
