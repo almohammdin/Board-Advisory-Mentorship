@@ -109,6 +109,29 @@ h1{font-size:31px;line-height:1.35}.hero .lead{font-size:16px}
 }
 }
 
+
+@media screen{
+.footer.footer-slim{padding:6px 0;background:#e9e2d5}
+.footer-strip{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.footer-slim .footer-brand{display:flex;align-items:center}
+.footer-slim .wordmark{display:block;width:150px;height:48px}
+.footer-slim .author{display:flex;align-items:center;gap:6px;font-size:11px;white-space:nowrap}
+.footer-slim .signature{display:block;width:82px;height:34px}
+.footer-slim .socials{display:flex;gap:4px;margin:0}
+.footer-slim .socials a{width:32px;height:32px;font-size:16px;background:transparent;border:0}
+.footer-return{font-size:12px;text-decoration:none;white-space:nowrap}
+@media(max-width:650px){
+.footer-strip{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.footer-slim .footer-brand{grid-column:1;grid-row:1}
+.footer-slim .author{grid-column:2;grid-row:1;justify-content:flex-end}
+.footer-slim .socials{grid-column:1;grid-row:2;justify-content:flex-start}
+.footer-return{grid-column:2;grid-row:2;justify-self:end;font-size:11px}
+.footer-slim .wordmark{height:44px}
+.footer-slim .signature{width:72px;height:30px}
+.footer-slim .author{font-size:10px;gap:4px}
+}
+}
+
 @media print{body{background:white;font-size:12pt}.top,.hero,.aside,#quiz,.learn,.actions,.result-tools,.footer,.skip,.assessment-intro,.progress-top{display:none!important}.section{padding:0;border:0}.wrap{width:100%}.assessment-grid{display:block}.panel{border:0;padding:0}.result-head{background:white;color:var(--ink);border-bottom:2px solid var(--navy);border-radius:0}.result-head h2{color:var(--navy)}.result-head p,.result-head .eyebrow{color:var(--ink)}.rec{margin-bottom:10px}.source{color:var(--ink)}.rec p{color:var(--ink)}@page{size:A4;margin:16mm}}
 </style>
 </head><body>
@@ -143,12 +166,12 @@ h1{font-size:31px;line-height:1.35}.hero .lead{font-size:16px}
 <a class="ref" href="https://www.theiia.org/en/standards/2024-standards/global-internal-audit-standards/" target="_blank" rel="noopener"><strong>المعايير العالمية للمراجعة الداخلية ↗</strong><span>The IIA · مرجع مهني لاستقلال الوظيفة والإشراف على أعمالها.</span></a>
 </div><p class="meta">إصدار الأداة 3.0 · <bdi dir="ltr">01-11-2026</bdi> · المصادر للاستدلال المهني، إعداد حتى لحلول الأعمال.</p></div></section>
 </main>
-<footer class="footer"><div class="wrap"><div class="footer-main"><div><svg class="wordmark" viewBox="134 149 746 269" role="img" aria-label="حتى لحلول الأعمال"><image href="https://almohammdin.github.io/hatta-brand-guide/assets/hatta-logo.webp" width="1000" height="526"/></svg><p>تنظيم الأعمال · الشراكات · النمو</p></div><div><div class="author"><span>أعدت بواسطة</span><img class="signature" src="https://almohammdin.github.io/hatta-brand-guide/assets/naif-signature.webp" alt="نايف المحمدي" width="110" height="55"></div><div class="socials">
+<footer class="footer footer-slim"><div class="wrap footer-strip"><a class="footer-brand" href="https://almohammdin.github.io/services/" aria-label="حتى لحلول الأعمال"><svg class="wordmark" viewBox="134 149 746 269" role="img" aria-label="حتى لحلول الأعمال"><image href="https://almohammdin.github.io/hatta-brand-guide/assets/hatta-logo.webp" width="1000" height="526"/></svg></a><div class="author"><span>أعدت بواسطة</span><img class="signature" src="https://almohammdin.github.io/hatta-brand-guide/assets/naif-signature.webp" alt="نايف المحمدي" width="110" height="55"></div><div class="socials">
 <a href="https://x.com/almohammdin" target="_blank" rel="noopener" aria-label="حساب نايف على X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
 <a href="https://www.linkedin.com/in/naif-almohammdi/" target="_blank" rel="noopener" aria-label="حساب نايف على لينكدإن"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
 <a href="https://www.snapchat.com/@almohammdin" target="_blank" rel="noopener" aria-label="حساب نايف على سناب شات"><i class="fa-brands fa-snapchat" aria-hidden="true"></i></a>
 <a href="https://www.tiktok.com/@almohammdin" target="_blank" rel="noopener" aria-label="حساب نايف على تيك توك"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
-</div></div></div><div class="footer-bottom"><span>© 2026 حتى لحلول الأعمال · بوصلة المجالس</span><a href="https://almohammdin.github.io/services/">استكشف الأدوات والخدمات ←</a></div></div></footer>
+</div><a class="footer-return" href="https://almohammdin.github.io/services/">الأدوات والخدمات ←</a></div></footer>
 <script>
     const questions = [
       {
