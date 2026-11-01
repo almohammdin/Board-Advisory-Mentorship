@@ -22,13 +22,100 @@
 @media(max-width:850px){.hero-grid{grid-template-columns:1fr;gap:30px}.hero{padding:40px 0;background-size:260px}.assessment-grid{grid-template-columns:1fr}.aside{padding:0}.aside ol{display:flex;flex-wrap:wrap;gap:10px 30px;margin:0}.section{padding:40px 0}.navlinks{gap:12px;font-size:12px}.preview{max-width:600px}.aside p{margin-bottom:8px}}
 @media(max-width:560px){body{font-size:16px}.wrap{width:calc(100% - 32px)}.nav{min-height:78px}.navlinks a:not(:last-child){display:none}.wordmark{width:150px;height:55px}.hero{background-image:none}.panel{padding:20px}.options,.refs{grid-template-columns:1fr}.question h3{font-size:21px}.option{min-height:60px}.preview{padding:22px}.footer-main{flex-direction:column;align-items:center;text-align:center}.footer-bottom{flex-direction:column;text-align:center}.rec-top{align-items:flex-start;flex-direction:column}.rec{padding:18px}.actions .btn{flex:1 1 auto}.lead{font-size:17px}h1{font-size:36px}.assessment-grid{gap:20px}.aside ol{display:block}.result-head{padding:20px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* Compact spacing and clearer Hatta contrast */
+@media screen{
+:root{--muted:#46546b;--line:#cbd2dd}
+body{line-height:1.7}
+html{scroll-padding-top:78px}
+.nav{min-height:68px}
+.wordmark{width:150px;height:54px}
+h1{font-size:clamp(30px,3.5vw,46px);margin:8px 0 14px;line-height:1.3}
+h2{font-size:clamp(25px,2.7vw,34px);margin-bottom:10px}
+.hero{padding:30px 0 34px;background-color:var(--navy);background-image:url('https://almohammdin.github.io/hatta-brand-guide/assets/frame-dark.svg');background-size:290px;color:white}
+.hero-grid{gap:32px}
+.hero h1{color:white}
+.hero .eyebrow{color:var(--sand);margin-bottom:8px}
+.hero .lead{color:#e1e7f1;font-size:17px}
+.hero .meta{color:#d5deed;margin-top:12px}
+.hero .btn:not(.light){background:var(--sand);border-color:var(--sand);color:var(--navy)}
+.hero .btn.light{background:transparent;border-color:#a8b7d1;color:white}
+.preview{padding:20px 22px;border-radius:14px;box-shadow:none;color:var(--ink)}
+.preview:before{margin-bottom:12px}
+.hero .preview .eyebrow{color:#805218}
+.hero .preview p,.hero .preview .meta{color:var(--muted)}
+.preview h3{margin:4px 0 8px}
+.minirow{padding:10px 0;gap:10px}
+.num{width:28px;height:28px}
+.actions{margin-top:16px;gap:10px}
+.btn{padding:10px 18px;min-height:44px}
+.section{padding:32px 0}
+#assessment{background:#edf1f7}
+#roles{background:white}
+#references{background:#f3eee4}
+.section-head{margin-bottom:18px}
+.section-head p{margin-bottom:0}
+.assessment-grid{gap:24px}
+.aside{padding:10px 0}
+.aside li{padding:3px 0}
+.aside ol{margin:8px 0}
+.aside .meta{margin-top:10px}
+.panel{padding:24px;border-color:#bdc8d8}
+.progress{margin:9px 0 18px}
+.question h3{margin:4px 0 8px;font-size:22px}
+.options{gap:9px;margin-top:15px}
+.option{min-height:54px;padding:12px 14px;background:#f7f8fa;border-color:#b8c3d3}
+.option.selected{background:#e4ecf8;border-color:var(--navy)}
+.assessment-actions{margin-top:20px}
+.details{padding:10px 0}
+td,th{padding:12px}
+th{background:#e8edf5}
+.ref{padding:16px 18px}
+.ref span{margin-top:5px}
+.refs{gap:10px}
+.meta{margin-top:12px}
+.rec{padding:18px}
+.rec p{margin:9px 0}
+.footer{padding:14px 0 10px;background:#e9e2d5;border-top:1px solid #c4b9a7}
+.footer-main{gap:16px}
+.footer p{margin:2px 0 0;font-size:12px;color:#37465d}
+.footer-main>div:last-child{display:flex;align-items:center;gap:20px}
+.author{gap:8px;color:#37465d}
+.signature{width:92px;height:40px}
+.socials{gap:6px;margin:0}
+.socials a{width:40px;height:40px;font-size:17px;border-color:#bbc4d1}
+.footer-bottom{margin-top:10px;padding-top:8px;gap:10px;font-size:11px;color:#37465d}
+@media(max-width:850px){
+.hero-grid{gap:20px}.hero{padding:25px 0}.section{padding:28px 0}
+.aside{padding:0}.aside ol{display:flex;gap:4px 25px;flex-wrap:wrap}
+.footer-main>div:last-child{gap:10px;flex-wrap:wrap;justify-content:center}
+}
+@media(max-width:560px){
+.nav{min-height:64px}.hero{padding:22px 0;background-image:none}
+h1{font-size:31px;line-height:1.35}.hero .lead{font-size:16px}
+.hero-grid{gap:16px}.preview{padding:16px}.preview h3{font-size:20px}
+.minirow{padding:8px 0;font-size:14px}
+.section{padding:24px 0}.section-head{margin-bottom:15px}.panel{padding:18px}
+.aside ol{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;font-size:14px}
+.aside h3{margin-bottom:6px}.aside .meta{font-size:12px}
+.assessment-grid{gap:16px}.option{min-height:52px}
+.footer-main{display:grid;grid-template-columns:150px 1fr;gap:10px;text-align:right;align-items:center}
+.footer-main>div:last-child{display:flex;flex-direction:column;gap:6px;align-items:center}
+.footer .wordmark{width:150px;height:54px}
+.footer p{font-size:10px;line-height:1.5}
+.author{font-size:10px;gap:5px}.signature{width:80px;height:35px}
+.socials{gap:2px}.socials a{width:36px;height:36px;font-size:16px}
+.footer-bottom{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;margin-top:8px;padding-top:7px;font-size:10px}
+}
+}
+
 @media print{body{background:white;font-size:12pt}.top,.hero,.aside,#quiz,.learn,.actions,.result-tools,.footer,.skip,.assessment-intro,.progress-top{display:none!important}.section{padding:0;border:0}.wrap{width:100%}.assessment-grid{display:block}.panel{border:0;padding:0}.result-head{background:white;color:var(--ink);border-bottom:2px solid var(--navy);border-radius:0}.result-head h2{color:var(--navy)}.result-head p,.result-head .eyebrow{color:var(--ink)}.rec{margin-bottom:10px}.source{color:var(--ink)}.rec p{color:var(--ink)}@page{size:A4;margin:16mm}}
 </style>
 </head><body>
 <a class="skip" href="#assessment">انتقل إلى التقييم</a>
 <header class="top"><nav class="wrap nav" aria-label="التنقل الرئيسي"><a href="https://almohammdin.github.io/services/" aria-label="حتى لحلول الأعمال"><svg class="wordmark" viewBox="134 149 746 269" role="img" aria-label="حتى لحلول الأعمال"><image href="https://almohammdin.github.io/hatta-brand-guide/assets/hatta-logo.webp" width="1000" height="526"/></svg></a><div class="navlinks"><a href="#roles">تعرف على الأدوار</a><a href="#references">المراجع</a><a href="#assessment">ابدأ التقييم ←</a></div></nav></header>
 <main>
-<section class="hero"><div class="wrap hero-grid"><div><span class="eyebrow">بوصلة المجالس · أداة من حتى</span><h1>حدد احتياج منشأتك<br>للمجلس واللجان والمشورة</h1><p class="lead">أجب عن أسئلة حول ملكية منشأتك وإدارتها ومرحلة نموها. تحصل على توصيات تساعدك على ترتيب الأدوار وتحديد أولويات التطوير.</p><div class="actions"><a class="btn" href="#assessment">ابدأ التقييم</a><a class="btn light" href="#example">شاهد مثال النتيجة</a></div><p class="meta"><bdi dir="ltr">11–13</bdi> سؤالا بحسب الحالة · نتيجة فورية · معالجة الإجابات داخل المتصفح</p></div>
+<section class="hero"><div class="wrap hero-grid"><div><span class="eyebrow">بوصلة المجالس</span><h1>حدد احتياج منشأتك<br>للمجلس واللجان والمشورة</h1><p class="lead">أجب عن أسئلة حول ملكية منشأتك وإدارتها ومرحلة نموها. تحصل على توصيات تساعدك على ترتيب الأدوار وتحديد أولويات التطوير.</p><div class="actions"><a class="btn" href="#assessment">ابدأ التقييم</a><a class="btn light" href="#example">شاهد مثال النتيجة</a></div><p class="meta"><bdi dir="ltr">11–13</bdi> سؤالا بحسب الحالة · نتيجة فورية · معالجة الإجابات داخل المتصفح</p></div>
 <aside class="preview" id="example"><span class="eyebrow">مثال توضيحي</span><h3>شركة عائلية تتوسع</h3><p>إدارة بيد المالك، وفروع متعددة، وملاحظات مالية متكررة.</p><div class="minirow"><span class="num">1</span><span>تحديد أدوار الملاك والمجلس والإدارة</span></div><div class="minirow"><span class="num">2</span><span>تقييم لجنة المراجعة والرقابة المالية</span></div><div class="minirow"><span class="num">3</span><span>تجهيز معايير التعيين والمكافآت</span></div><p class="meta">تتغير التوصيات والأولويات بحسب إجابات كل منشأة.</p></aside></div></section>
 <section class="section" id="assessment"><div class="wrap"><div class="section-head assessment-intro"><span class="eyebrow">تقييم احتياج المنشأة</span><h2>رتب أدوارك وخطوتك القادمة</h2><p>اختر الوصف الأقرب إلى واقع المنشأة. يمكنك الرجوع وتعديل الإجابات في أي وقت.</p></div>
 <div class="assessment-grid"><aside class="aside"><h3>ماذا ستحصل عليه؟</h3><ol><li>الأدوار المقترحة لمنشأتك.</li><li>سبب كل توصية.</li><li>خطوة عملية للبدء.</li><li>تقرير يمكنك حفظه ومشاركته.</li></ol><p class="meta">تبقى الإجابات في جلسة الصفحة الحالية. ينشأ ملف المشاركة عند طلبك ويشمل إجاباتك.</p></aside>
