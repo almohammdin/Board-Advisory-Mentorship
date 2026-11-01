@@ -1,611 +1,90 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#081a35">
-  <meta name="description" content="بوصلة المجالس: أداة تشخيص تساعد المنشأة على تحديد هيكل المجلس واللجان والمراجعة الداخلية والمشورة المناسب لها.">
-  <meta property="og:title" content="بوصلة المجالس">
-  <meta property="og:description" content="من احتياج المنشأة إلى هيكل مجلس ولجان ومشورة أوضح.">
-  <meta property="og:type" content="website">
-  <title>بوصلة المجالس | تشخيص المجلس واللجان والمشورة</title>
-  <link rel="icon" type="image/svg+xml" href="assets/board-compass-logo.svg">
-  <link rel="apple-touch-icon" href="assets/board-compass-logo.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --navy:#071a36;
-      --navy-2:#0d2c56;
-      --gold:#c99a2e;
-      --gold-2:#e4bc58;
-      --red:#c72d38;
-      --ink:#14243b;
-      --muted:#68778c;
-      --line:#dce3ec;
-      --paper:#f6f8fb;
-      --white:#fff;
-      --green:#197552;
-      --amber:#9d6200;
-      --blue:#215fa8;
-      --shadow:0 18px 50px rgba(7,26,54,.11);
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:"IBM Plex Sans Arabic",Tahoma,Arial,sans-serif;
-      color:var(--ink);
-      background:var(--paper);
-      line-height:1.75;
-      -webkit-font-smoothing:antialiased;
-    }
-    button,input{font:inherit}
-    a{color:inherit}
-    .top-line{
-      height:5px;
-      background:linear-gradient(90deg,var(--navy) 0 36%,var(--gold) 36% 72%,var(--red) 72%);
-    }
-    .shell{width:min(1160px,calc(100% - 32px));margin:auto}
-    .hero{
-      position:relative;
-      overflow:hidden;
-      color:white;
-      background:
-        radial-gradient(circle at 15% 30%,rgba(201,154,46,.22),transparent 25%),
-        radial-gradient(circle at 88% 80%,rgba(199,45,56,.15),transparent 24%),
-        linear-gradient(135deg,#06162d 0%,#0b2a51 62%,#081b35 100%);
-      padding:26px 0 78px;
-    }
-    .hero:after{
-      content:"";
-      position:absolute;inset:0;
-      background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-      background-size:42px 42px;
-      mask-image:linear-gradient(to bottom,black,transparent);
-      pointer-events:none;
-    }
-    .nav,.hero-grid{position:relative;z-index:1}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:18px}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-    .brand-logo{
-      width:62px;height:62px;border-radius:18px;overflow:hidden;background:white;
-      box-shadow:0 10px 28px rgba(0,0,0,.2);
-    }
-    .brand-logo img{width:100%;height:100%;object-fit:cover;transform:scale(1.18)}
-    .brand-name{font-size:1.06rem;font-weight:700}
-    .brand-en{font-size:.72rem;color:rgba(255,255,255,.62);display:block;direction:ltr;text-align:right}
-    .nav-links{display:flex;gap:18px;align-items:center;font-size:.88rem;color:rgba(255,255,255,.78)}
-    .nav-links a{text-decoration:none}
-    .nav-links a:hover{color:white}
-    .hero-grid{
-      display:grid;grid-template-columns:1.14fr .86fr;gap:54px;align-items:center;
-      padding-top:62px;
-    }
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:8px;
-      color:var(--gold-2);font-weight:600;font-size:.9rem;
-      border:1px solid rgba(228,188,88,.3);background:rgba(228,188,88,.08);
-      padding:7px 12px;border-radius:999px;
-    }
-    h1{font-size:clamp(2.4rem,6vw,4.7rem);line-height:1.12;margin:20px 0 14px;letter-spacing:-1.5px}
-    .hero h1 span{color:var(--gold-2)}
-    .hero-copy{font-size:clamp(1rem,2vw,1.25rem);color:rgba(255,255,255,.78);max-width:700px;margin:0}
-    .hero-note{margin-top:18px;color:rgba(255,255,255,.58);font-size:.88rem}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-    .btn{
-      border:0;border-radius:13px;padding:13px 22px;cursor:pointer;text-decoration:none;
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;
-      transition:.2s ease;
-    }
-    .btn:hover{transform:translateY(-2px)}
-    .btn-primary{background:var(--gold);color:#13213a;box-shadow:0 12px 28px rgba(201,154,46,.25)}
-    .btn-secondary{color:white;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18)}
-    .logo-stage{
-      justify-self:center;width:min(390px,100%);aspect-ratio:1;border-radius:42px;
-      background:rgba(255,255,255,.96);padding:10px;overflow:hidden;
-      box-shadow:0 35px 70px rgba(0,0,0,.28);
-      transform:rotate(-2deg);
-    }
-    .logo-stage img{width:100%;height:100%;object-fit:cover;transform:scale(1.12)}
-    .section{padding:76px 0}
-    .section.white{background:white}
-    .section.dark{background:var(--navy);color:white}
-    .section-head{max-width:760px;margin-bottom:34px}
-    .kicker{color:var(--gold);font-weight:700;font-size:.88rem;margin-bottom:5px}
-    h2{font-size:clamp(1.75rem,4vw,2.65rem);line-height:1.35;margin:0 0 10px}
-    .section-head p{color:var(--muted);font-size:1.03rem;margin:0}
-    .dark .section-head p{color:rgba(255,255,255,.65)}
-    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .feature{
-      background:white;border:1px solid var(--line);border-radius:18px;padding:24px;
-      box-shadow:0 8px 24px rgba(7,26,54,.05);
-    }
-    .feature-number{
-      width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
-      color:var(--navy);background:#f4e5b9;font-weight:800;margin-bottom:16px;
-    }
-    .feature h3{font-size:1.08rem;margin:0 0 7px}
-    .feature p{font-size:.9rem;color:var(--muted);margin:0}
-    .layers{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:28px}
-    .layer{
-      border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.055);
-      border-radius:16px;padding:19px 15px;text-align:center;
-    }
-    .layer b{display:block;color:var(--gold-2);margin-bottom:5px;font-size:.94rem}
-    .layer span{font-size:.82rem;color:rgba(255,255,255,.67)}
-    .committee-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
-    .committee-card{
-      border-radius:22px;padding:28px;border:1px solid var(--line);background:white;
-      box-shadow:0 10px 30px rgba(7,26,54,.05);
-    }
-    .committee-card.primary{border-top:5px solid var(--gold)}
-    .committee-card.people{border-top:5px solid var(--red)}
-    .committee-card h3{margin:0 0 6px;font-size:1.35rem}
-    .committee-card .sub{font-size:.84rem;color:var(--muted);margin-bottom:18px}
-    .clean-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-    .clean-list li{display:flex;gap:10px;font-size:.92rem;color:#435269}
-    .clean-list li:before{content:"";width:7px;height:7px;background:var(--gold);border-radius:50%;margin-top:.65rem;flex:0 0 auto}
-    .distinction{
-      margin-top:20px;background:#f7f1e2;border:1px solid #ead9aa;border-radius:14px;padding:15px;
-      font-size:.88rem;color:#5e4a18;
-    }
-    .assessment-wrap{
-      display:grid;grid-template-columns:.68fr 1.32fr;gap:20px;align-items:start;
-    }
-    .assessment-side{
-      background:linear-gradient(160deg,var(--navy-2),var(--navy));color:white;
-      border-radius:22px;padding:25px;position:sticky;top:18px;
-    }
-    .assessment-side h3{margin:0 0 8px;font-size:1.4rem}
-    .assessment-side p{font-size:.9rem;color:rgba(255,255,255,.68);margin:0 0 18px}
-    .side-points{display:grid;gap:12px}
-    .side-point{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;color:rgba(255,255,255,.8)}
-    .side-point i{font-style:normal;color:var(--gold-2)}
-    .assessment{
-      background:white;border:1px solid var(--line);border-radius:22px;padding:28px;
-      box-shadow:var(--shadow);min-height:470px;
-    }
-    .progress-row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:22px}
-    .progress-meta{font-size:.78rem;color:var(--muted);white-space:nowrap}
-    .progress{height:8px;background:#e8edf3;border-radius:999px;overflow:hidden;flex:1}
-    .progress span{height:100%;display:block;background:linear-gradient(90deg,var(--gold),var(--gold-2));width:0;transition:.25s}
-    .question-kicker{color:var(--gold);font-size:.8rem;font-weight:700}
-    .question h3{font-size:clamp(1.28rem,3vw,1.7rem);line-height:1.55;margin:7px 0 5px}
-    .question-help{font-size:.86rem;color:var(--muted);margin:0 0 22px}
-    .options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-    .option{
-      text-align:right;border:1px solid var(--line);background:#fbfcfe;color:var(--ink);
-      border-radius:14px;padding:15px;cursor:pointer;transition:.15s;min-height:64px;
-    }
-    .option:hover{border-color:#b8c6d9;background:#f5f8fc}
-    .option.selected{border-color:var(--gold);background:#fff9e9;box-shadow:0 0 0 2px rgba(201,154,46,.14)}
-    .option small{display:block;color:var(--muted);font-size:.72rem;margin-top:2px}
-    .assessment-actions{display:flex;justify-content:space-between;gap:10px;margin-top:25px}
-    .btn-back{background:#eef2f6;color:#4c5d72}
-    .btn-next{background:var(--navy);color:white}
-    .btn-next:disabled{opacity:.4;cursor:not-allowed;transform:none}
-    .result{display:none}
-    .result.show{display:block}
-    .result-head{
-      border-radius:18px;padding:22px;background:linear-gradient(140deg,var(--navy),var(--navy-2));color:white;
-      margin-bottom:18px;
-    }
-    .result-head small{color:var(--gold-2);font-weight:700}
-    .result-head h3{font-size:1.5rem;margin:5px 0}
-    .result-head p{color:rgba(255,255,255,.72);font-size:.9rem;margin:0}
-    .recommendations{display:grid;gap:11px}
-    .recommendation{border:1px solid var(--line);border-radius:15px;padding:18px;background:#fff}
-    .recommendation-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
-    .recommendation h4{font-size:1.05rem;margin:0}
-    .recommendation p{font-size:.86rem;color:var(--muted);margin:0}
-    .status{font-size:.68rem;font-weight:700;padding:5px 9px;border-radius:999px;white-space:nowrap}
-    .status.required{background:#fde8ea;color:#a71e2a}
-    .status.strong{background:#fff0ce;color:#805000}
-    .status.development{background:#e6f0fc;color:#215b9b}
-    .status.later{background:#edf0f4;color:#5d6877}
-    .result-tools{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
-    .result-tools-title{font-size:.72rem;color:var(--muted);margin-bottom:8px}
-    .tool-links{display:flex;flex-wrap:wrap;gap:7px}
-    .tool-link{
-      font-size:.74rem;color:#536278;text-decoration:none;border:1px solid var(--line);
-      background:#f8fafc;border-radius:999px;padding:6px 10px;
-    }
-    .tool-link:hover{color:var(--navy);border-color:#aebdce}
-    .result-actions{display:flex;gap:9px;margin-top:18px}
-    .references-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-    .reference-card{
-      background:white;border:1px solid var(--line);border-radius:18px;padding:20px;
-      text-decoration:none;display:flex;flex-direction:column;min-height:230px;transition:.2s;
-      box-shadow:0 7px 25px rgba(7,26,54,.045);
-    }
-    .reference-card:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(7,26,54,.09)}
-    .reference-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}
-    .entity-logo{
-      width:52px;height:52px;border:1px solid var(--line);border-radius:14px;background:white;
-      display:grid;place-items:center;overflow:hidden;
-    }
-    .entity-logo img{width:34px;height:34px;object-fit:contain}
-    .ref-type{
-      padding:5px 9px;border-radius:999px;font-size:.67rem;font-weight:700;
-      color:var(--blue);background:#e8f1fb;
-    }
-    .ref-type.law{color:#8f232c;background:#fdebed}
-    .ref-type.standard{color:#745500;background:#fff1cb}
-    .ref-type.study{color:#176445;background:#e5f5ee}
-    .reference-card h3{font-size:1rem;line-height:1.5;margin:0 0 7px}
-    .reference-card p{font-size:.82rem;color:var(--muted);margin:0}
-    .reference-source{margin-top:auto;padding-top:15px;font-size:.7rem;color:#8b96a5}
-    .reference-note{
-      margin-top:18px;font-size:.78rem;color:var(--muted);background:#edf2f7;border-radius:12px;padding:12px 14px;
-    }
-    .method-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .method{border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:18px;background:rgba(255,255,255,.045)}
-    .method b{font-size:.9rem;color:var(--gold-2);display:block;margin-bottom:5px}
-    .method span{font-size:.78rem;color:rgba(255,255,255,.64)}
-    footer{padding:30px 0;background:#041126;color:rgba(255,255,255,.66)}
-    .footer-row{display:flex;justify-content:space-between;align-items:center;gap:16px}
-    .footer-name{color:white;font-weight:600}
-    .footer-links{display:flex;gap:13px;font-size:.8rem}
-    .footer-links a{text-decoration:none}
-    .version{font-size:.66rem;color:rgba(255,255,255,.38);margin-top:5px}
-    .notice{
-      background:#fff8e6;border:1px solid #ecd9a5;border-radius:14px;padding:15px;
-      font-size:.84rem;color:#62501f;margin-top:18px;
-    }
-    @media (max-width:900px){
-      .hero-grid,.committee-grid,.assessment-wrap{grid-template-columns:1fr}
-      .logo-stage{grid-row:1;width:260px}
-      .hero-grid{text-align:center}
-      .hero-copy{margin:auto}
-      .hero-actions{justify-content:center}
-      .assessment-side{position:static}
-      .feature-grid,.references-grid{grid-template-columns:repeat(2,1fr)}
-      .layers{grid-template-columns:repeat(2,1fr)}
-      .method-grid{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:620px){
-      .shell{width:min(100% - 22px,1160px)}
-      .nav-links{display:none}
-      .brand-logo{width:52px;height:52px}
-      .hero{padding-bottom:58px}
-      .hero-grid{padding-top:42px;gap:28px}
-      h1{font-size:2.45rem}
-      .section{padding:56px 0}
-      .feature-grid,.references-grid,.method-grid{grid-template-columns:1fr}
-      .layers{grid-template-columns:1fr 1fr}
-      .options{grid-template-columns:1fr}
-      .assessment{padding:20px;min-height:520px}
-      .committee-card{padding:22px}
-      .recommendation-top{align-items:flex-start}
-      .footer-row{flex-direction:column;text-align:center}
-    }
-    @media print{
-      .top-line,.nav,.hero-actions,.assessment-side,.assessment-actions,.result-tools,.result-actions,.references-section,.method-section,footer{display:none!important}
-      body{background:white}
-      .hero{padding:20px;background:white;color:var(--ink)}
-      .hero-grid{display:block}
-      .logo-stage{width:120px;box-shadow:none;margin:auto}
-      .hero-copy,.hero-note{color:var(--muted)}
-      .section{padding:20px 0}
-      .assessment-wrap{display:block}
-      .assessment{border:0;box-shadow:none;padding:0}
-      .question{display:none!important}
-      .result.show{display:block}
-    }
-  </style>
-</head>
-<body>
-  <div class="top-line"></div>
-  <header class="hero">
-    <div class="shell">
-      <nav class="nav" aria-label="التنقل">
-        <a class="brand" href="#">
-          <span class="brand-logo"><img src="assets/board-compass-logo.svg" alt="شعار بوصلة المجالس"></span>
-          <span>
-            <span class="brand-name">بوصلة المجالس</span>
-            <span class="brand-en">Board Compass</span>
-          </span>
-        </a>
-        <div class="nav-links">
-          <a href="#committees">اللجان</a>
-          <a href="#assessment">ابدأ التشخيص</a>
-          <a href="#references">المرجعيات</a>
-        </div>
-      </nav>
-      <div class="hero-grid">
-        <div>
-          <span class="eyebrow">أداة تشخيص المجالس واللجان والمشورة</span>
-          <h1>ما الهيكل الذي <span>تحتاجه منشأتك؟</span></h1>
-          <p class="hero-copy">حدد وضع المنشأة ومرحلتها ومخاطرها، لتحصل على تصور يجمع بين المجلس واللجان والمراجعة الداخلية والمشورة بحسب الحاجة.</p>
-          <p class="hero-note">النتيجة قد تجمع أكثر من مسار. المجلس واللجنة والمستشار والمرشد أدوار متكاملة وليست خيارات متعارضة.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#assessment">ابدأ التشخيص</a>
-            <a class="btn btn-secondary" href="#references">اطلع على المرجعيات</a>
-          </div>
-        </div>
-        <div class="logo-stage">
-          <img src="assets/board-compass-logo.svg" alt="بوصلة المجالس">
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section class="section white">
-      <div class="shell">
-        <div class="section-head">
-          <div class="kicker">الهدف</div>
-          <h2>من السؤال العام إلى هيكل واضح</h2>
-          <p>تحدد الأداة ما يناسب المنشأة من هياكل التوجيه والرقابة والمشورة، مع الفصل بين المتطلب التنظيمي والممارسة الموصى بها والخيار التطويري.</p>
-        </div>
-        <div class="feature-grid">
-          <article class="feature">
-            <span class="feature-number">1</span>
-            <h3>تحديد نطاق المنشأة</h3>
-            <p>الشكل النظامي، الإدراج، القطاع، الملكية، مرحلة النمو وتعقيد العمليات.</p>
-          </article>
-          <article class="feature">
-            <span class="feature-number">2</span>
-            <h3>تركيب الحل المناسب</h3>
-            <p>يمكن الجمع بين مجلس ولجان ومراجعة داخلية ومجلس استشاري أو مرشد.</p>
-          </article>
-          <article class="feature">
-            <span class="feature-number">3</span>
-            <h3>شرح سبب التوصية</h3>
-            <p>كل نتيجة توضح الحاجة والأولوية دون منح شهادة امتثال أو حكم قانوني.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section dark">
-      <div class="shell">
-        <div class="section-head">
-          <div class="kicker">منظومة متكاملة</div>
-          <h2>الحوكمة ليست مجلساً واحداً</h2>
-          <p>قد تحتاج المنشأة أكثر من طبقة في الوقت نفسه، بحسب وضعها النظامي وتعقيدها ومخاطرها.</p>
-        </div>
-        <div class="layers">
-          <div class="layer"><b>الملكية</b><span>الشركاء والمساهمون</span></div>
-          <div class="layer"><b>المجلس</b><span>التوجيه والرقابة</span></div>
-          <div class="layer"><b>اللجان</b><span>التخصص والعمق</span></div>
-          <div class="layer"><b>التأكيد</b><span>المراجعة والمخاطر</span></div>
-          <div class="layer"><b>المشورة</b><span>الخبرة والتوجيه</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section white" id="committees">
-      <div class="shell">
-        <div class="section-head">
-          <div class="kicker">تركيز الأداة</div>
-          <h2>لجان تخدم المجلس ولا تستبدله</h2>
-          <p>تتعمق بوصلة المجالس في لجنة المراجعة والمراجعة الداخلية، ثم المكافآت والترشيحات، وتفحص الحاجة إلى الدمج أو الفصل.</p>
-        </div>
-        <div class="committee-grid">
-          <article class="committee-card primary">
-            <h3>لجنة المراجعة</h3>
-            <div class="sub">Audit Committee</div>
-            <ul class="clean-list">
-              <li>سلامة التقارير المالية والرقابة الداخلية.</li>
-              <li>الإشراف على المراجعة الداخلية ومواردها واستقلالها.</li>
-              <li>العلاقة مع المراجع الخارجي ومتابعة ملاحظاته.</li>
-              <li>البلاغات والتعاملات مع الأطراف ذات العلاقة.</li>
-              <li>تقدير الحاجة إلى لجنة مخاطر مستقلة عند زيادة العبء.</li>
-            </ul>
-            <div class="distinction"><b>الفصل المهني:</b> لجنة المراجعة جهة إشراف، والمراجعة الداخلية وظيفة تأكيد مستقلة، والمراجع الخارجي طرف مهني مستقل.</div>
-          </article>
-          <article class="committee-card people">
-            <h3>المكافآت والترشيحات</h3>
-            <div class="sub">Remuneration & Nomination</div>
-            <ul class="clean-list">
-              <li>تكوين المجلس ومصفوفة المهارات والاستقلال.</li>
-              <li>الترشيح وإعادة الترشيح ومعالجة الشواغر.</li>
-              <li>التعاقب للرئيس التنفيذي والقيادات الحرجة.</li>
-              <li>سياسات المكافآت والحوافز وارتباطها بالأداء.</li>
-              <li>تحديد ملاءمة الدمج أو الفصل بين اللجنتين.</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="assessment">
-      <div class="shell">
-        <div class="section-head">
-          <div class="kicker">التشخيص</div>
-          <h2>ابن خريطة مجلسك ولجانك</h2>
-          <p>أسئلة متفرعة تظهر بحسب حالتك. لا تطلب الأداة اسم المنشأة ولا تحفظ الإجابات بعد إغلاق الصفحة.</p>
-        </div>
-        <div class="assessment-wrap">
-          <aside class="assessment-side">
-            <h3>ماذا ستحصل عليه؟</h3>
-            <p>تصور مركب يركز على الهيكل المناسب الآن.</p>
-            <div class="side-points">
-              <div class="side-point"><i>◆</i><span>المجلس أو الهيكل الإداري الأنسب.</span></div>
-              <div class="side-point"><i>◆</i><span>اللجان المطلوبة أو الموصى بها.</span></div>
-              <div class="side-point"><i>◆</i><span>شكل المراجعة الداخلية المناسب.</span></div>
-              <div class="side-point"><i>◆</i><span>الحاجة إلى مجلس استشاري أو مرشد.</span></div>
-              <div class="side-point"><i>◆</i><span>روابط مساندة هامشية عند وجود احتياج متخصص.</span></div>
-            </div>
-          </aside>
-          <div class="assessment">
-            <div id="quiz">
-              <div class="progress-row">
-                <div class="progress"><span id="progressBar"></span></div>
-                <div class="progress-meta" id="progressText"></div>
-              </div>
-              <div class="question" id="question"></div>
-              <div class="assessment-actions">
-                <button class="btn btn-back" id="backBtn" type="button">السابق</button>
-                <button class="btn btn-next" id="nextBtn" type="button">التالي</button>
-              </div>
-            </div>
-            <div class="result" id="result">
-              <div class="result-head">
-                <small>خريطة المجلس واللجان المقترحة</small>
-                <h3 id="resultTitle"></h3>
-                <p id="resultSummary"></p>
-              </div>
-              <div class="recommendations" id="recommendations"></div>
-              <div class="result-tools" id="resultTools"></div>
-              <div class="result-actions">
-                <button class="btn btn-next" type="button" onclick="window.print()">طباعة النتيجة</button>
-                <button class="btn btn-back" type="button" id="restartBtn">إعادة التشخيص</button>
-              </div>
-              <div class="notice">هذه نتيجة تشخيصية استرشادية. نطاق الالتزامات يتحدد وفق الشكل النظامي والجهة المنظمة والنظام الأساس واللوائح السارية على المنشأة.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section white references-section" id="references">
-      <div class="shell">
-        <div class="section-head">
-          <div class="kicker">مكتبة المرجعيات</div>
-          <h2>نظام، معيار، توصية ودراسة</h2>
-          <p>بطاقات مستقلة توضح نوع المرجع والجهة وما يضيفه إلى الأداة. وجود الجهة هنا للتعريف بالمصدر ولا يعني اعتمادها للأداة.</p>
-        </div>
-        <div class="references-grid">
-          <a class="reference-card" href="https://mc.gov.sa/ar/Pages/NCS.aspx" target="_blank" rel="noopener">
-            <div class="reference-top">
-              <span class="entity-logo"><img src="https://www.google.com/s2/favicons?domain=mc.gov.sa&sz=128" alt="وزارة التجارة"></span>
-              <span class="ref-type law">نظام</span>
-            </div>
-            <h3>نظام الشركات ولائحته التنفيذية</h3>
-            <p>المرجع الأساسي للأشكال النظامية وإدارة الشركات ومسؤوليات المديرين وأعضاء المجالس.</p>
-            <div class="reference-source">وزارة التجارة · السعودية</div>
-          </a>
-          <a class="reference-card" href="https://cma.org.sa/RulesRegulations/Regulations/Documents/CorpGovReg.pdf" target="_blank" rel="noopener">
-            <div class="reference-top">
-              <span class="entity-logo"><img src="https://www.google.com/s2/favicons?domain=cma.org.sa&sz=128" alt="هيئة السوق المالية"></span>
-              <span class="ref-type law">لائحة</span>
-            </div>
-            <h3>لائحة حوكمة الشركات</h3>
-            <p>مرجعية اللجان في الشركات المدرجة، ومنها المراجعة والمكافآت والترشيحات وتكوينها واختصاصاتها.</p>
-            <div class="reference-source">هيئة السوق المالية · السعودية</div>
-          </a>
-          <a class="reference-card" href="https://www.theiia.org/en/standards/2024-standards/global-internal-audit-standards/" target="_blank" rel="noopener">
-            <div class="reference-top">
-              <span class="entity-logo"><img src="https://www.google.com/s2/favicons?domain=theiia.org&sz=128" alt="معهد المراجعين الداخليين"></span>
-              <span class="ref-type standard">معيار مهني</span>
-            </div>
-            <h3>المعايير العالمية للمراجعة الداخلية 2024</h3>
-            <p>تؤكد تفويض المراجعة الداخلية واستقلالها وإشراف المجلس على أدائها ومواردها.</p>
-            <div class="reference-source">The IIA · عالمي</div>
-          </a>
-          <a class="reference-card" href="https://saia.gov.sa/ar" target="_blank" rel="noopener">
-            <div class="reference-top">
-              <span class="entity-logo"><img src="https://www.google.com/s2/favicons?domain=saia.gov.sa&sz=128" alt="الهيئة السعودية للمراجعين الداخليين"></span>
-              <span class="ref-type standard">مرجعية مهنية</span>
-            </div>
-            <h3>المرجعية السعودية للمراجعة الداخلية</h3>
-            <p>مرجع مهني للمراجعة الداخلية في المملكة وتطبيق المعايير والممارسات المرتبطة بالمهنة.</p>
-            <div class="reference-source">الهيئة السعودية للمراجعين الداخليين</div>
-          </a>
-          <a class="reference-card" href="https://www.oecd.org/en/publications/g20-oecd-principles-of-corporate-governance-2023_ed750b30-en/full-report/component-8.html" target="_blank" rel="noopener">
-            <div class="reference-top">
-              <span class="entity-logo"><img src="https://www.google.com/s2/favicons?domain=oecd.org&sz=128" alt="منظمة التعاون الاقتصادي والتنمية"></span>
-              <span class="ref-type">توصية عالمية</span>
-            </div>
-            <h3>مبادئ G20/OECD لحوكمة الشركات 2023</h3>
-            <p>توصي باللجان المتخصصة بصورة متناسبة مع حجم الشركة وهيكلها وتعقيدها ومخاطرها.</p>
-            <div class="reference-source">OECD · عالمي</div>
-          </a>
-          <a class="reference-card" href="https://www.ifc.org/content/dam/ifc/doc/mgrt/family-business-governance-handbook.pdf" target="_blank" rel="noopener">
-            <div class="reference-top">
-              <span class="entity-logo"><img src="https://www.google.com/s2/favicons?domain=ifc.org&sz=128" alt="مؤسسة التمويل الدولية"></span>
-              <span class="ref-type">دليل</span>
-            </div>
-            <h3>دليل حوكمة الشركات العائلية</h3>
-            <p>يفصل بين حوكمة العائلة وحوكمة الشركة، ويعرض دور المجلس المستقل والمجلس الاستشاري والتعاقب.</p>
-            <div class="reference-source">IFC · مجموعة البنك الدولي</div>
-          </a>
-          <a class="reference-card" href="https://www.coso.org/guidance-on-ic" target="_blank" rel="noopener">
-            <div class="reference-top">
-              <span class="entity-logo"><img src="https://www.google.com/s2/favicons?domain=coso.org&sz=128" alt="COSO"></span>
-              <span class="ref-type standard">إطار</span>
-            </div>
-            <h3>إطار الرقابة الداخلية</h3>
-            <p>مرجعية لتقييم بيئة الرقابة والمخاطر والأنشطة الرقابية والمعلومات والمتابعة.</p>
-            <div class="reference-source">COSO · عالمي</div>
-          </a>
-          <a class="reference-card" href="https://www.bdc.ca/globalassets/digizuite/10260-bdc_study_advisory_boards.pdf" target="_blank" rel="noopener">
-            <div class="reference-top">
-              <span class="entity-logo"><img src="https://www.google.com/s2/favicons?domain=bdc.ca&sz=128" alt="BDC"></span>
-              <span class="ref-type study">دراسة</span>
-            </div>
-            <h3>دراسة المجالس الاستشارية للمنشآت الصغيرة والمتوسطة</h3>
-            <p>دليل مساند على ارتباط المجالس الاستشارية بتحسين القرار والأداء، مع التعامل معها كدراسة ارتباط لا ضمان سببي.</p>
-            <div class="reference-source">BDC · كندا</div>
-          </a>
-          <a class="reference-card" href="https://www.frc.org.uk/library/standards-codes-policy/corporate-governance/uk-corporate-governance-code/" target="_blank" rel="noopener">
-            <div class="reference-top">
-              <span class="entity-logo"><img src="https://www.google.com/s2/favicons?domain=frc.org.uk&sz=128" alt="مجلس التقارير المالية"></span>
-              <span class="ref-type">ممارسة مقارنة</span>
-            </div>
-            <h3>UK Corporate Governance Code 2024</h3>
-            <p>مرجع مقارن لتكوين لجان المراجعة والترشيحات والمكافآت والرقابة الداخلية، وليس التزاماً سعودياً.</p>
-            <div class="reference-source">FRC · المملكة المتحدة</div>
-          </a>
-        </div>
-        <div class="reference-note">آخر مراجعة للمكتبة: يوليو 2026. تراجع المراجع دورياً وعند صدور تحديث تنظيمي مؤثر.</div>
-      </div>
-    </section>
-
-    <section class="section dark method-section">
-      <div class="shell">
-        <div class="section-head">
-          <div class="kicker">منهجية النتيجة</div>
-          <h2>ثلاث طبقات من القواعد</h2>
-          <p>صممت النتيجة لتكون مفهومة وقابلة للمراجعة، دون اختزال القرار في درجة واحدة.</p>
-        </div>
-        <div class="method-grid">
-          <div class="method"><b>قواعد الانطباق</b><span>الشكل النظامي والإدراج والقطاع.</span></div>
-          <div class="method"><b>قواعد الاحتياج</b><span>الحجم والتعقيد والمخاطر والملكية.</span></div>
-          <div class="method"><b>قواعد التركيب</b><span>الجمع بين أكثر من مجلس أو لجنة أو وظيفة.</span></div>
-          <div class="method"><b>قواعد الأولوية</b><span>متطلب، توصية قوية، خيار تطويري أو مرحلة لاحقة.</span></div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="shell footer-row">
-      <div>
-        <div class="footer-name">نايف المحمدي</div>
-        <div class="version">بوصلة المجالس · الإصدار 2.0.0</div>
-      </div>
-      <div class="footer-links">
-        <a href="https://x.com/almohammdin" target="_blank" rel="noopener">X</a>
-        <a href="https://www.linkedin.com/in/naif-almohammdi/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://snapchat.com/t/xBFQJjSW" target="_blank" rel="noopener">Snapchat</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#061f56">
+<title>بوصلة المجالس | حتى لحلول الأعمال</title>
+<meta name="description" content="حدد احتياج منشأتك للمجلس واللجان والمشورة. تقييم عملي يوضح الأسباب وأولويات التنفيذ، مع تقرير قابل للحفظ والمشاركة.">
+<meta property="og:title" content="بوصلة المجالس | حتى لحلول الأعمال">
+<meta property="og:description" content="حدد احتياج منشأتك للمجلس واللجان والمشورة.">
+<meta property="og:type" content="website"><meta property="og:locale" content="ar_SA">
+<meta property="og:url" content="https://almohammdin.github.io/Board-Advisory-Mentorship/">
+<meta property="og:image" content="https://almohammdin.github.io/hatta-brand-guide/hatta-brand-guide-og.jpg">
+<link rel="canonical" href="https://almohammdin.github.io/Board-Advisory-Mentorship/">
+<link rel="icon" href="https://almohammdin.github.io/hatta-brand-guide/assets/hatta-mark.webp">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+@font-face{font-family:Thmanyah;src:url('https://almohammdin.github.io/hatta-brand-guide/assets/fonts/thmanyah-sans-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Thmanyah;src:url('https://almohammdin.github.io/hatta-brand-guide/assets/fonts/thmanyah-sans-700-900.woff2') format('woff2');font-weight:700 900;font-display:swap}
+@font-face{font-family:ThmanyahDisplay;src:url('https://almohammdin.github.io/hatta-brand-guide/assets/fonts/thmanyah-serif-display-700.woff2') format('woff2');font-weight:700;font-display:swap}
+:root{--navy:#061f56;--gold:#b47a2d;--sand:#e6d2ae;--paper:#fbfaf7;--ink:#17233c;--muted:#657084;--line:#dde1e8}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.85 Thmanyah,Tahoma,sans-serif}button,a,input{font:inherit}a{color:inherit}img{max-width:100%}button{cursor:pointer}button:disabled{opacity:.5;cursor:default}a,button{touch-action:manipulation}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:5px}h1,h2{font-family:ThmanyahDisplay,Thmanyah,sans-serif;font-weight:700;line-height:1.35;color:var(--navy)}h1{font-size:clamp(32px,4.5vw,58px);margin:12px 0 22px}h2{font-size:clamp(26px,3vw,38px);margin:0 0 16px}h3{line-height:1.6;font-size:22px}p{margin:0 0 14px}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}.top{border-bottom:1px solid var(--line);background:#fbfaf7f5;position:sticky;top:0;z-index:5}.nav{display:flex;align-items:center;justify-content:space-between;min-height:86px;gap:20px}.wordmark{width:155px;height:57px}.navlinks{display:flex;gap:24px;align-items:center;font-size:14px}.navlinks a{text-decoration:none}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid var(--navy);border-radius:10px;padding:12px 22px;background:var(--navy);color:white;text-decoration:none;font-weight:700;min-height:48px;transition:background .18s ease,box-shadow .18s ease}.btn:hover{background:#0b2f75;box-shadow:0 5px 15px #061f5614}.btn.light{background:white;color:var(--navy);border-color:var(--line)}.btn.gold{background:var(--sand);color:var(--navy);border-color:var(--sand)}.hero{padding:65px 0 70px;background-image:url('https://almohammdin.github.io/hatta-brand-guide/assets/frame-light.svg');background-repeat:no-repeat;background-position:left center;background-size:420px}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:65px;align-items:center}.eyebrow{font-size:14px;color:#8a5b20;font-weight:700;display:block;margin-bottom:14px}.lead{font-size:19px;color:var(--muted);max-width:650px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.meta{font-size:13px;color:var(--muted);margin-top:20px}.preview{padding:30px;background:white;border:1px solid var(--line);border-radius:20px;box-shadow:0 18px 60px #061f560b;position:relative}.preview:before{content:"";display:block;height:3px;width:50px;background:var(--gold);margin-bottom:23px}.preview h3{font-size:22px;margin:8px 0}.preview p{font-size:14px;color:var(--muted)}.minirow{display:flex;gap:14px;align-items:center;border-top:1px solid var(--line);padding:15px 0;font-size:15px}.num{display:inline-grid;place-items:center;width:32px;height:32px;flex-shrink:0;border-radius:50%;background:#f4eee3;color:#8a5b20;font-size:14px}.section{padding:64px 0;border-top:1px solid var(--line)}.section-head{max-width:730px;margin-bottom:26px}.section-head p{color:var(--muted)}.assessment-grid{display:grid;grid-template-columns:260px 1fr;gap:34px;align-items:start}.aside{padding:24px 0}.aside h3{font-size:21px;margin-top:0}.aside p{font-size:15px;color:var(--muted)}.aside ol{padding-right:20px;font-size:15px}.aside li{padding:6px 0}.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:32px;min-width:0}.progress-top{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);gap:10px}.progress{height:5px;background:#eee;margin:12px 0 28px;border-radius:9px;overflow:hidden}.progress span{display:block;height:100%;background:var(--gold);transition:width .2s}.question h3{margin:6px 0 12px;font-size:24px}.help{font-size:14px;color:var(--muted)}.options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}.option{text-align:right;padding:17px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);min-height:70px;display:flex;align-items:center;gap:12px}.option .dot{width:17px;height:17px;border:1px solid #8994a5;border-radius:50%;flex-shrink:0}.option:hover{border-color:var(--gold)}.option.selected{border-color:var(--navy);background:#eff3fa}.selected .dot{border:5px solid var(--navy);background:white}.assessment-actions{display:flex;justify-content:space-between;gap:12px;margin-top:30px}.result-head{background:var(--navy);color:white;padding:25px;border-radius:14px;margin-bottom:20px}.result-head h2{color:white;font-size:28px}.result-head p{color:#e2e9f5;font-size:15px}.result-head .eyebrow{color:var(--sand)}.recommendations{display:grid;gap:16px}.rec{border:1px solid var(--line);border-radius:12px;padding:23px;break-inside:avoid}.rec-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.rec h3{font-size:21px;margin:0}.badge{font-size:12px;color:#8a5b20;background:#f7eddc;padding:4px 10px;border-radius:25px;white-space:nowrap}.rec p{font-size:15px;margin:13px 0;color:var(--muted)}.rec .step{color:var(--ink);background:var(--paper);padding:12px;border-radius:7px}.source{font-size:12px;color:#38527e;text-underline-offset:4px}.notice{font-size:13px;color:var(--muted);padding:18px 0}.details{border-top:1px solid var(--line);padding:18px 0}.details summary{cursor:pointer;font-weight:700;color:var(--navy);padding:8px 0}.details p{color:var(--muted);font-size:15px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:15px;min-width:570px}td,th{text-align:right;padding:16px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--navy);background:#f3f1eb}.refs{display:grid;grid-template-columns:1fr 1fr;gap:14px}.ref{display:block;background:white;border:1px solid var(--line);padding:22px;border-radius:12px;text-decoration:none}.ref strong{display:block;color:var(--navy)}.ref span{display:block;font-size:14px;color:var(--muted);margin-top:8px}.tool-links{display:flex;gap:9px;flex-wrap:wrap}.tool-link{font-size:14px;border:1px solid var(--line);padding:10px 15px;border-radius:8px;text-decoration:none;background:var(--paper)}.footer{padding:42px 0 22px;border-top:1px solid var(--line);background:#f4f0e7}.footer-main{display:flex;justify-content:space-between;gap:28px;align-items:center}.footer p{font-size:13px;color:var(--muted);margin:10px 0}.author{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}.signature{width:110px;height:55px;object-fit:contain;filter:brightness(0) saturate(100%) invert(12%) sepia(51%) saturate(2576%) hue-rotate(208deg) brightness(82%) contrast(104%)}.socials{display:flex;gap:9px;justify-content:center;margin-top:12px}.socials a{display:grid;place-items:center;width:43px;height:43px;background:white;border:1px solid var(--line);border-radius:50%;text-decoration:none;color:var(--navy);font-size:19px}.footer-bottom{margin-top:25px;padding-top:15px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;font-size:12px;color:var(--muted)}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}[hidden]{display:none!important}.skip{position:absolute;top:-80px;right:20px;background:var(--navy);color:white;padding:12px;z-index:20}.skip:focus{top:10px}
+@media(max-width:850px){.hero-grid{grid-template-columns:1fr;gap:30px}.hero{padding:40px 0;background-size:260px}.assessment-grid{grid-template-columns:1fr}.aside{padding:0}.aside ol{display:flex;flex-wrap:wrap;gap:10px 30px;margin:0}.section{padding:40px 0}.navlinks{gap:12px;font-size:12px}.preview{max-width:600px}.aside p{margin-bottom:8px}}
+@media(max-width:560px){body{font-size:16px}.wrap{width:calc(100% - 32px)}.nav{min-height:78px}.navlinks a:not(:last-child){display:none}.wordmark{width:150px;height:55px}.hero{background-image:none}.panel{padding:20px}.options,.refs{grid-template-columns:1fr}.question h3{font-size:21px}.option{min-height:60px}.preview{padding:22px}.footer-main{flex-direction:column;align-items:center;text-align:center}.footer-bottom{flex-direction:column;text-align:center}.rec-top{align-items:flex-start;flex-direction:column}.rec{padding:18px}.actions .btn{flex:1 1 auto}.lead{font-size:17px}h1{font-size:36px}.assessment-grid{gap:20px}.aside ol{display:block}.result-head{padding:20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{body{background:white;font-size:12pt}.top,.hero,.aside,#quiz,.learn,.actions,.result-tools,.footer,.skip,.assessment-intro,.progress-top{display:none!important}.section{padding:0;border:0}.wrap{width:100%}.assessment-grid{display:block}.panel{border:0;padding:0}.result-head{background:white;color:var(--ink);border-bottom:2px solid var(--navy);border-radius:0}.result-head h2{color:var(--navy)}.result-head p,.result-head .eyebrow{color:var(--ink)}.rec{margin-bottom:10px}.source{color:var(--ink)}.rec p{color:var(--ink)}@page{size:A4;margin:16mm}}
+</style>
+</head><body>
+<a class="skip" href="#assessment">انتقل إلى التقييم</a>
+<header class="top"><nav class="wrap nav" aria-label="التنقل الرئيسي"><a href="https://almohammdin.github.io/HATTA/" aria-label="حتى لحلول الأعمال"><svg class="wordmark" viewBox="134 149 746 269" role="img" aria-label="حتى لحلول الأعمال"><image href="https://almohammdin.github.io/hatta-brand-guide/assets/hatta-logo.webp" width="1000" height="526"/></svg></a><div class="navlinks"><a href="#roles">تعرف على الأدوار</a><a href="#references">المراجع</a><a href="#assessment">ابدأ التقييم ←</a></div></nav></header>
+<main>
+<section class="hero"><div class="wrap hero-grid"><div><span class="eyebrow">بوصلة المجالس · أداة من حتى</span><h1>حدد احتياج منشأتك<br>للمجلس واللجان والمشورة</h1><p class="lead">أجب عن أسئلة حول ملكية منشأتك وإدارتها ومرحلة نموها. تحصل على توصيات تساعدك على ترتيب الأدوار وتحديد أولويات التطوير.</p><div class="actions"><a class="btn" href="#assessment">ابدأ التقييم</a><a class="btn light" href="#example">شاهد مثال النتيجة</a></div><p class="meta">11–13 سؤالا بحسب الحالة · نتيجة فورية · معالجة الإجابات داخل المتصفح</p></div>
+<aside class="preview" id="example"><span class="eyebrow">مثال توضيحي</span><h3>شركة عائلية تتوسع</h3><p>إدارة بيد المالك، وفروع متعددة، وملاحظات مالية متكررة.</p><div class="minirow"><span class="num">1</span><span>تحديد أدوار الملاك والمجلس والإدارة</span></div><div class="minirow"><span class="num">2</span><span>تقييم لجنة المراجعة والرقابة المالية</span></div><div class="minirow"><span class="num">3</span><span>تجهيز معايير التعيين والمكافآت</span></div><p class="meta">تتغير التوصيات والأولويات بحسب إجابات كل منشأة.</p></aside></div></section>
+<section class="section" id="assessment"><div class="wrap"><div class="section-head assessment-intro"><span class="eyebrow">تقييم احتياج المنشأة</span><h2>رتب أدوارك وخطوتك القادمة</h2><p>اختر الوصف الأقرب إلى واقع المنشأة. يمكنك الرجوع وتعديل الإجابات في أي وقت.</p></div>
+<div class="assessment-grid"><aside class="aside"><h3>ماذا ستحصل عليه؟</h3><ol><li>الأدوار المقترحة لمنشأتك.</li><li>سبب كل توصية.</li><li>خطوة عملية للبدء.</li><li>تقرير يمكنك حفظه ومشاركته.</li></ol><p class="meta">تبقى الإجابات في جلسة الصفحة الحالية. ينشأ ملف المشاركة عند طلبك ويشمل إجاباتك.</p></aside>
+<div class="panel"><div id="quiz"><div class="progress-top"><span id="axisText"></span><span id="progressText"></span></div><div class="progress" role="progressbar" aria-label="تقدم التقييم" aria-valuemin="0" aria-valuemax="100" id="progressTrack"><span id="progressBar"></span></div><div class="question" id="question"></div><div class="assessment-actions"><button class="btn light" id="backBtn" type="button">السابق</button><button class="btn" id="nextBtn" type="button" disabled>التالي</button></div></div>
+<div id="result" hidden><div class="result-head"><span class="eyebrow">بوصلة المجالس · حتى لحلول الأعمال</span><h2 id="resultTitle" tabindex="-1">أولويات تطوير منشأتك</h2><p id="resultSummary"></p></div><div id="recommendations" class="recommendations"></div><div id="resultTools" class="result-tools"></div><details class="details"><summary>راجع إجاباتك</summary><div id="answersReview"></div></details><div class="actions"><button class="btn" id="downloadBtn">حفظ التقرير HTML</button><button class="btn light" id="shareBtn">مشاركة التقرير</button><button class="btn light" id="printBtn">طباعة / PDF</button><button class="btn light" id="editBtn">تعديل الإجابات</button><button class="btn light" id="restartBtn">تقييم جديد</button></div><p id="exportStatus" role="status" class="meta"></p><p class="notice">النتيجة تقدير أولي مبني على إجاباتك. تعتمد الالتزامات النظامية بعد التحقق من الشكل القانوني والجهة المنظمة والنظام الأساس واللوائح السارية.</p></div></div></div></div></section>
+<section class="section learn" id="roles"><div class="wrap"><div class="section-head"><span class="eyebrow">فهم الأدوار</span><h2>أدوار تتكامل في إدارة المنشأة</h2><p>لكل دور مهمة محددة. تجمع المنشأة بينها بحسب احتياجها ومرحلة نموها.</p></div>
+<div class="table-wrap"><table><thead><tr><th>الدور</th><th>ماذا يقدم؟</th><th>متى تراجع حاجتك إليه؟</th></tr></thead><tbody>
+<tr><th>الملاك والشركاء</th><td>تحديد حقوق الملكية والقرارات المحجوزة لهم.</td><td>عند تأسيس الشراكة أو تغير الملكية.</td></tr>
+<tr><th>مجلس الإدارة</th><td>توجيه المنشأة ومتابعة الأداء ومساءلة الإدارة ضمن صلاحياته.</td><td>بحسب الشكل القانوني وتعقيد الأعمال ومتطلبات المستثمرين.</td></tr>
+<tr><th>لجان المجلس</th><td>دراسة الملفات المتخصصة ومساندة المجلس.</td><td>بحسب المتطلبات التنظيمية وحجم العمل والمخاطر.</td></tr>
+<tr><th>المراجعة الداخلية</th><td>تقييم مستقل للرقابة وإدارة المخاطر والحوكمة.</td><td>عند تعدد العمليات أو ارتفاع المخاطر أو وجود متطلب خاص.</td></tr>
+<tr><th>المجلس الاستشاري</th><td>خبرات متنوعة تقدم الرأي؛ يبقى الاعتماد لدى أصحاب الصلاحية.</td><td>عندما تحتاج القرارات إلى نقاش متكرر وخبرات متعددة.</td></tr>
+<tr><th>المستشار المتخصص</th><td>معالجة ملف محدد بمخرجات ومدة متفق عليها.</td><td>عند وجود احتياج مثل إعادة الهيكلة أو التمويل أو العقود.</td></tr>
+<tr><th>المرشد القيادي</th><td>مساعدة القائد على تطوير مهاراته وقراراته.</td><td>عند تولي دور جديد أو تحديد هدف للتطوير القيادي.</td></tr>
+</tbody></table></div>
+<details class="details"><summary>لجان تساعد المجلس على أداء مهامه</summary><p><strong>لجنة المراجعة:</strong> تتابع التقارير المالية والرقابة وأعمال المراجعة. وتنفذ المراجعة الداخلية فحصا مستقلا، بينما يراجع المراجع الخارجي القوائم المالية ضمن نطاق تكليفه.</p><p><strong>الترشيحات والمكافآت:</strong> تعنى بمعايير اختيار أعضاء المجلس والقيادات وسياسات التقييم والمكافآت والتعاقب. يحدد تشكيل اللجان ودمجها أو فصلها بعد مراجعة المتطلبات المنطبقة.</p></details>
+<details class="details"><summary>كيف تتكون النتيجة؟</summary><p>تعتمد الأداة على 4 جوانب: نوع المنشأة، واحتياجها الحالي، وتكامل الأدوار، وأولوية التنفيذ. كل توصية مرتبطة بإجابات محددة ومرجع مساند.</p><p>تظهر الحالات القطاعية والجهات الأهلية والأشكال الأخرى مع خطوة للتحقق من متطلباتها الخاصة. تعبر الأولويات عن تقدير استرشادي للاحتياج. ويستخدم مرجع النظام للتحقق من النطاق، ومرجع الممارسة لتطوير الأداء.</p></details>
+<details class="details"><summary>خصوصية الإجابات ومشاركة التقرير</summary><p>تعالج الإجابات في المتصفح وتبقى في ذاكرة جلسة الصفحة حتى إغلاقها أو تحديثها. يتضمن التقرير المحفوظ الأسئلة والإجابات والتوصيات؛ اختر من تشاركه معه. تحمل الصفحة ملفات الهوية والخطوط من صفحات حتى والأيقونات من مزود خارجي.</p></details>
+</div></section>
+<section class="section learn" id="references"><div class="wrap"><div class="section-head"><span class="eyebrow">المراجع</span><h2>مصادر تساعدك على المراجعة</h2><p>تعرض المصادر بحسب دورها: التحقق من المتطلبات، أو الاستفادة من الممارسات المهنية.</p></div><div class="refs">
+<a class="ref" href="https://mc.gov.sa/ar/Pages/NCS.aspx" target="_blank" rel="noopener"><strong>نظام الشركات ولائحته التنفيذية ↗</strong><span>وزارة التجارة · مرجع التحقق من الأشكال القانونية وإدارة الشركات.</span></a>
+<a class="ref" href="https://cma.gov.sa/RulesRegulations/Regulations/Pages/details.aspx?code=2" target="_blank" rel="noopener"><strong>لائحة حوكمة الشركات ↗</strong><span>هيئة السوق المالية · تراجع المواد ونطاق انطباقها بحسب السوق والحالة.</span></a>
+<a class="ref" href="https://www.ifc.org/en/insights-reports/2010/sme-governance-guidebook" target="_blank" rel="noopener"><strong>دليل حوكمة المنشآت الصغيرة والمتوسطة ↗</strong><span>IFC · توصيات مرتبطة بمرحلة النمو وخطوات عملية للتطوير.</span></a>
+<a class="ref" href="https://www.ifc.org/en/what-we-do/sector-expertise/corporate-governance/cg-methodology-tools" target="_blank" rel="noopener"><strong>أدوات تقييم الحوكمة ↗</strong><span>IFC · أطر متدرجة تراعي نوع المنشأة والملكية.</span></a>
+<a class="ref" href="https://www.theiia.org/en/standards/2024-standards/global-internal-audit-standards/" target="_blank" rel="noopener"><strong>المعايير العالمية للمراجعة الداخلية ↗</strong><span>The IIA · مرجع مهني لاستقلال الوظيفة والإشراف على أعمالها.</span></a>
+</div><p class="meta">إصدار الأداة 3.0 · 01-11-2026 · المصادر للاستدلال المهني، ونسب إعداد الأداة إلى حتى.</p></div></section>
+</main>
+<footer class="footer"><div class="wrap"><div class="footer-main"><div><svg class="wordmark" viewBox="134 149 746 269" role="img" aria-label="حتى لحلول الأعمال"><image href="https://almohammdin.github.io/hatta-brand-guide/assets/hatta-logo.webp" width="1000" height="526"/></svg><p>تنظيم الأعمال · الشراكات · النمو</p></div><div><div class="author"><span>أعدت بواسطة</span><img class="signature" src="https://almohammdin.github.io/hatta-brand-guide/assets/naif-signature.webp" alt="نايف المحمدي" width="110" height="55"></div><div class="socials">
+<a href="https://x.com/almohammdin" target="_blank" rel="noopener" aria-label="حساب نايف على X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+<a href="https://www.linkedin.com/in/naif-almohammdi/" target="_blank" rel="noopener" aria-label="حساب نايف على لينكدإن"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+<a href="https://www.snapchat.com/@almohammdin" target="_blank" rel="noopener" aria-label="حساب نايف على سناب شات"><i class="fa-brands fa-snapchat" aria-hidden="true"></i></a>
+<a href="https://www.tiktok.com/@almohammdin" target="_blank" rel="noopener" aria-label="حساب نايف على تيك توك"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+</div></div></div><div class="footer-bottom"><span>© 2026 حتى لحلول الأعمال · بوصلة المجالس</span><a href="https://almohammdin.github.io/services/">استكشف الأدوات والخدمات ←</a></div></div></footer>
+<script>
     const questions = [
       {
         id:"legal", axis:"الوضع النظامي", text:"ما الشكل الأقرب لمنشأتك؟",
         help:"يحدد هذا السؤال نقطة البداية ونطاق المتطلبات التنظيمية.",
         options:[
           ["llc","شركة ذات مسؤولية محدودة"],
-          ["closed","شركة مساهمة أو مساهمة مبسطة غير مدرجة"],
-          ["listed","شركة مساهمة مدرجة"],
-          ["other","جهة غير ربحية أو شكل آخر"]
+          ["closed","شركة مساهمة غير مدرجة"],
+["simplified","شركة مساهمة مبسطة"],
+          ["listed","شركة مدرجة في السوق الرئيسية"],
+["nomu","شركة مدرجة في السوق الموازية"],
+          ["nonprofit","جمعية أو مؤسسة أهلية"],
+["other","شكل آخر"]
         ]
       },
       {
         id:"regulated", axis:"القطاع", text:"هل تخضع المنشأة لإشراف قطاعي خاص؟",
         help:"قد تفرض الجهة المنظمة متطلبات إضافية على المجلس واللجان.",
         options:[
-          ["none","لا يوجد إشراف قطاعي خاص"],
+          ["none","نشاط تجاري عام"],
           ["cma","نشاط خاضع لهيئة السوق المالية"],
-          ["financial","بنك أو تمويل أو تأمين"],
+          ["financial","بنك أو شركة تمويل"],
+["insurance","شركة تأمين"],
           ["other","قطاع منظم آخر"]
         ]
       },
@@ -621,7 +100,7 @@
       },
       {
         id:"stage", axis:"المرحلة", text:"ما المرحلة الأقرب للمنشأة؟",
-        help:"الهيكل المناسب ينمو مع الشركة ولا يبدأ دائماً بصورة مكتملة.",
+        help:"تتطور أدوار الإدارة والمشورة مع نمو المنشأة.",
         options:[
           ["early","بداية أو تشغيل محدود"],
           ["growth","نمو وتوسع"],
@@ -643,30 +122,30 @@
         id:"board", axis:"المجلس", text:"ما الهيكل القائم حالياً؟",
         help:"نميز بين الحاجة إلى الإنشاء والحاجة إلى التطوير أو التقييم.",
         options:[
-          ["none","لا يوجد مجلس"],
-          ["informal","اجتماعات ملاك أو إدارة بصورة غير منتظمة"],
+          ["none","الإدارة بيد المالك أو المدير"],
+          ["informal","اجتماعات ملاك أو إدارة حسب الحاجة"],
           ["formal","مجلس إدارة أو مجلس مديرين قائم"],
           ["committees","مجلس قائم ولديه لجنة أو أكثر"]
         ]
       },
       {
-        id:"financial", axis:"المراجعة والرقابة", text:"ما مستوى مخاطر التقارير والرقابة المالية؟",
+        id:"financial", axis:"المراجعة والرقابة", text:"أي وصف أقرب للتقارير والرقابة المالية؟",
         help:"فكر في حجم التمويل والتعاملات المعقدة والأطراف ذات العلاقة والملاحظات المتكررة.",
         options:[
-          ["low","محدود"],
-          ["medium","متوسط"],
-          ["high","مرتفع"],
+          ["low","تقارير منتظمة ومعاملات بسيطة"],
+["medium","تمويل أو معاملات تحتاج متابعة إضافية"],
+["high","تمويل كبير أو معاملات معقدة وأطراف مرتبطة"],
           ["issues","توجد ملاحظات أو فجوات متكررة"]
         ]
       },
       {
         id:"audit", axis:"المراجعة والرقابة", text:"ما وضع المراجعة الداخلية؟",
-        help:"المحاسبة والمراجع الخارجي لا يؤديان وظيفة المراجعة الداخلية نفسها.",
+        help:"المراجعة الداخلية تفحص الرقابة وإدارة المخاطر بصورة مستقلة.",
         options:[
-          ["none","لا توجد وظيفة مراجعة داخلية"],
+          ["none","المراجعة الداخلية قيد التأسيس"],
           ["outsourced","مراجعات دورية أو إسناد خارجي"],
           ["function","وظيفة أو إدارة مراجعة داخلية"],
-          ["unclear","الدور أو الارتباط غير واضح"]
+          ["unclear","الدور أو جهة الإشراف بحاجة إلى تحديد"]
         ]
       },
       {
@@ -681,9 +160,9 @@
       },
       {
         id:"succession", axis:"التعاقب", text:"ما وضع التعاقب القيادي؟",
-        help:"يشمل الرئيس التنفيذي والقيادات الحرجة وليس الملكية فقط.",
+        help:"يشمل تجهيز البدائل للرئيس التنفيذي والقيادات الرئيسية.",
         options:[
-          ["stable","مستقر ولا يوجد انتقال قريب"],
+          ["stable","قيادة مستقرة في المرحلة الحالية"],
           ["planning","نحتاج خطة خلال السنوات القادمة"],
           ["soon","انتقال متوقع خلال سنتين"],
           ["urgent","شاغر أو انتقال عاجل"]
@@ -696,191 +175,148 @@
         options:[
           ["clear","نعم، توجد معايير مكتوبة"],
           ["partial","توجد ممارسات غير مكتملة"],
-          ["none","لا توجد معايير واضحة"],
+          ["none","المعايير بحاجة إلى إعداد"],
           ["dispute","توجد حساسية أو خلاف"]
         ]
       },
       {
         id:"familyTransition", axis:"الملكية العائلية", text:"هل يوجد انتقال جيلي أو قيادي مؤثر؟",
-        help:"نستخدم الإجابة لتقدير الحاجة إلى الاستقلال والترشيحات دون تشخيص الحوكمة العائلية بالكامل.",
+        help:"تساعد الإجابة على ترتيب أولوية إعداد القيادات وتحديد أدوار العائلة.",
         show:a=>a.ownership==="family",
         options:[
-          ["no","لا"],
+          ["no","استقرار في الجيل والقيادة الحالية"],
           ["later","متوقع لاحقاً"],
           ["soon","قريب"],
           ["active","يجري حالياً"]
         ]
       },
       {
-        id:"advice", axis:"المشورة", text:"ما نوع الخبرة الخارجية التي تحتاجها؟",
-        help:"يمكن أن تعمل المشورة بجانب المجلس واللجان.",
+        id:"advice", axis:"المشورة", text:"ما الذي تريد إنجازه بمساعدة خبرة خارجية؟",
+        help:"اختر الاحتياج الأقرب. يمكن أن تتكامل المشورة مع المجلس واللجان.",
         options:[
-          ["none","لا توجد حاجة محددة"],
-          ["specialist","خبير متخصص في موضوع محدد"],
-          ["advisory","مجلس استشاري متعدد الخبرات"],
-          ["mentor","تطوير وتوجيه للرئيس التنفيذي"]
+          ["none","ترتيب الإدارة الحالية"],
+          ["specialist","حل ملف محدد مثل التمويل أو العقود أو التشغيل"],
+          ["advisory","مناقشة التوسع والقرارات باستمرار مع خبرات متنوعة"],
+          ["mentor","تطوير مهارات القيادة واتخاذ القرار"]
         ]
       }
     ];
 
-    const answers = {};
-    let current = 0;
-    const questionEl = document.getElementById("question");
-    const progressBar = document.getElementById("progressBar");
-    const progressText = document.getElementById("progressText");
-    const backBtn = document.getElementById("backBtn");
-    const nextBtn = document.getElementById("nextBtn");
 
-    function visibleQuestions(){
-      return questions.filter(q => !q.show || q.show(answers));
-    }
 
-    function renderQuestion(){
-      const visible = visibleQuestions();
-      if(current >= visible.length) current = visible.length - 1;
-      const q = visible[current];
-      progressText.textContent = `${current + 1} من ${visible.length}`;
-      progressBar.style.width = `${((current + 1) / visible.length) * 100}%`;
-      questionEl.innerHTML = `
-        <div class="question-kicker">${q.axis}</div>
-        <h3>${q.text}</h3>
-        <p class="question-help">${q.help}</p>
-        <div class="options">
-          ${q.options.map(([value,label,small]) => `
-            <button type="button" class="option ${answers[q.id]===value?"selected":""}" data-value="${value}">
-              ${label}${small?`<small>${small}</small>`:""}
-            </button>`).join("")}
-        </div>`;
-      questionEl.querySelectorAll(".option").forEach(btn=>{
-        btn.addEventListener("click",()=>{
-          answers[q.id]=btn.dataset.value;
-          renderQuestion();
-        });
-      });
-      backBtn.style.visibility = current === 0 ? "hidden" : "visible";
-      nextBtn.disabled = !answers[q.id];
-      nextBtn.textContent = current === visible.length - 1 ? "عرض النتيجة" : "التالي";
-    }
+const SOURCES={
+ mc:{name:"نظام الشركات",url:"https://mc.gov.sa/ar/Pages/NCS.aspx"},
+ cma:{name:"لائحة حوكمة الشركات",url:"https://cma.gov.sa/RulesRegulations/Regulations/Pages/details.aspx?code=2"},
+ ifc:{name:"دليل IFC لحوكمة المنشآت الصغيرة والمتوسطة",url:"https://www.ifc.org/en/insights-reports/2010/sme-governance-guidebook"},
+ iia:{name:"المعايير العالمية للمراجعة الداخلية",url:"https://www.theiia.org/en/standards/2024-standards/global-internal-audit-standards/"}
+};
+function activeAnswers(input){
+ const a={...input};
+ if(a.ownership!=="family"){delete a.familyRules;delete a.familyTransition}
+ return a;
+}
+function evaluate(input){
+ const a=activeAnswers(input),recs=[];
+ const listed=["listed","nomu"].includes(a.legal),special=a.regulated!=="none";
+ const complex=["high","group"].includes(a.complexity),risk=["high","issues"].includes(a.financial);
+ const board=["formal","committees"].includes(a.board);
+ const family=a.ownership==="family";
+ const succession=["soon","urgent"].includes(a.succession)||(family&&["soon","active"].includes(a.familyTransition));
+ const familyIssue=family&&["none","dispute"].includes(a.familyRules);
+ const add=(key,title,priority,reason,action,source="ifc")=>recs.push({key,title,priority,reason,action,source});
+ if(listed||special||["nonprofit","other"].includes(a.legal)){
+  let reason=listed?(a.legal==="listed"?"اخترت شركة مدرجة في السوق الرئيسية.":"اخترت شركة مدرجة في السوق الموازية."):special?"اخترت نشاطا يخضع لإشراف قطاعي خاص.":"اخترت شكلا يحتاج مسارا تنظيميا متخصصا.";
+  add("scope","تحديد المتطلبات المنطبقة","تحقق أولا",reason,"طابق الشكل القانوني والنشاط والسوق مع اللوائح السارية، وسجل المادة ونطاق تطبيقها قبل اعتماد تشكيل المجلس واللجان.",listed?"cma":"mc");
+ }
+ if(a.legal==="closed"){
+  add("board","مراجعة تكوين مجلس الإدارة","أولوية حالية","اخترت شركة مساهمة غير مدرجة.","راجع تكوين المجلس وصلاحياته وفق نظام الشركات والنظام الأساس، ثم وثق خطة الاجتماعات.", "mc");
+ }else if(a.legal==="simplified"){
+  add("board","تحديد نموذج إدارة الشركة","أولوية حالية","اخترت شركة مساهمة مبسطة.","راجع نموذج الإدارة في النظام الأساس، وحدد صلاحيات الرئيس أو المدير أو المجلس بحسب النموذج المعتمد.","mc");
+ }else if(board||listed||complex||a.ownership==="investors"){
+  add("board",board?"تطوير عمل المجلس":"تحديد هيكل التوجيه والرقابة","أولوية حالية",board?"لدى المنشأة مجلس قائم.":complex?"عمليات المنشأة متعددة أو تشمل شركات تابعة.":"هيكل الملكية أو الإدراج يستدعي عناية بأدوار المجلس.","وثق القرارات المحجوزة للملاك وصلاحيات المجلس والإدارة، وأعد جدول اجتماعات وتقارير دورية.");
+ }else{
+  add("management","تنظيم قرارات الملاك والإدارة","أولوية حالية","الإدارة الحالية تعتمد على المالك أو اجتماعات حسب الحاجة.","حدد اجتماعا دوريا وقرارات تحتاج موافقة الملاك، ووثق الصلاحيات ومحاضر القرارات.");
+ }
+ if(listed||special||risk||complex||a.ownership==="investors"){
+  add("auditCommittee","تقييم تشكيل لجنة المراجعة","أولوية حالية",risk?"أشرت إلى تعقيد مالي أو ملاحظات متكررة.":complex?"تعدد العمليات يزيد الحاجة إلى متابعة متخصصة.":"طبيعة الملكية أو الإشراف التنظيمي تستدعي مراجعة ترتيبات الرقابة.","راجع متطلبات التشكيل أولا، ثم حدد اختصاصات اللجنة وخبرات أعضائها وتقاريرها للمجلس.",listed?"cma":"ifc");
+ }else{
+  add("controls","تقوية الرقابة المالية","أولوية حالية","المعاملات الحالية محدودة أو متوسطة التعقيد.","حدد صلاحيات الصرف والمراجعة، وجهز تقريرا ماليا دوريا ومتابعة للملاحظات.");
+ }
+ if(listed||special||risk||complex||a.audit==="unclear"){
+  const title=a.audit==="function"?"تطوير فاعلية المراجعة الداخلية":a.audit==="outsourced"?"تنظيم الإسناد للمراجعة الداخلية":a.audit==="unclear"?"تحديد دور المراجعة الداخلية":"تأسيس المراجعة الداخلية";
+  const reason=a.audit==="function"?"لديك وظيفة مراجعة داخلية قائمة.":a.audit==="outsourced"?"تستعين المنشأة بمراجعات دورية أو إسناد خارجي.":a.audit==="unclear"?"أشرت إلى حاجة لتحديد الدور أو جهة الإشراف.":"المخاطر أو التعقيد أو نطاق الإشراف يستدعي تقييم وظيفة المراجعة.";
+  add("internalAudit",title,"أولوية حالية",reason,"اعتمد نطاق العمل وخطة مبنية على المخاطر، وحدد الارتباط الوظيفي بالمجلس أو لجنة المراجعة والموارد المناسبة.","iia");
+ }
+ if(["complex","growing","conflict"].includes(a.people)||succession||familyIssue||listed){
+  add("people","تنظيم الترشيحات والمكافآت",succession?"أولوية حالية":"خطوة تالية",succession?"يوجد انتقال قيادي قريب أو جار.":familyIssue?"تحتاج تعيينات أفراد العائلة ومكافآتهم إلى معايير.":"التعيينات والمكافآت تحتاج متابعة متخصصة.","وثق معايير الاختيار والتقييم والمكافآت وخطة البدائل، ثم حدد تشكيل اللجان وملاءمة الدمج أو الفصل وفق القواعد المنطبقة.",listed?"cma":"ifc");
+ }
+ if(risk&&complex)add("risk","تخصيص متابعة للمخاطر","خطوة تالية","اجتمع التعقيد التشغيلي مع مخاطر مالية مرتفعة.","جهز سجل مخاطر ومسؤولي متابعة، وقيم تخصيص لجنة مخاطر بحسب العبء والمتطلبات القطاعية.");
+ if(a.advice==="specialist")add("advisor","الاستعانة بمستشار متخصص","خطوة تالية","تحتاج إلى معالجة ملف محدد.","حدد المشكلة والمخرجات والمدة، ثم اختر خبيرا مناسبا بنطاق عمل متفق عليه.");
+ if(a.advice==="advisory")add("advisory","تشكيل مجلس استشاري","خطوة تالية","تحتاج إلى خبرات متنوعة لمناقشة القرارات بصورة مستمرة.","حدد مجالات الخبرة ووتيرة اللقاءات وسرية المعلومات، ووثق أن دور المجلس تقديم المشورة وأن الاعتماد لدى أصحاب الصلاحية.");
+ if(a.advice==="mentor")add("mentor","إرشاد قيادي","خطوة تالية","هدفك تطوير مهارات القيادة واتخاذ القرار.","حدد هدفين للتطوير ومرشدا مناسبا وجدولا للجلسات، ثم راجع التقدم بعد 3 أشهر.");
+ if(a.stage==="transaction")add("transaction","تجهيز الحوكمة للصفقة","أولوية حالية","تستعد المنشأة لاستثمار أو استحواذ أو إدراج.","رتب وثائق الملكية والصلاحيات والمحاضر والتقارير، وحدد فجوات الحوكمة المطلوبة للصفقة.");
+ if(a.stage==="growth"&&a.advice==="none")add("growth","مراجعة الاحتياج للخبرات الخارجية","خطوة تالية","المنشأة في مرحلة نمو وتوسع.","حدد القرارات المقبلة والخبرات المتاحة داخل الفريق، ثم اختر دعما متخصصا بحسب الفجوة.");
+ return recs.sort((a,b)=>["تحقق أولا","أولوية حالية","خطوة تالية"].indexOf(a.priority)-["تحقق أولا","أولوية حالية","خطوة تالية"].indexOf(b.priority));
+}
 
-    function addRec(list,key,title,status,type,description){
-      if(!list.some(x=>x.key===key)) list.push({key,title,status,type,description});
-    }
 
-    function buildResult(){
-      const recs=[];
-      const isListed = answers.legal==="listed";
-      const isRegulated = ["cma","financial","other"].includes(answers.regulated);
-      const highComplexity = ["high","group"].includes(answers.complexity);
-      const financialRisk = ["high","issues"].includes(answers.financial);
-      const hasBoard = ["formal","committees"].includes(answers.board);
-      const familyConcern = answers.ownership==="family" && ["none","dispute"].includes(answers.familyRules);
-      const successionPressure = ["soon","urgent"].includes(answers.succession) || ["soon","active"].includes(answers.familyTransition);
+const answers={}; let current=0, lastRecs=[];
+const $=id=>document.getElementById(id);
+const visibleQuestions=()=>questions.filter(q=>!q.show||q.show(answers));
+const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function renderQuestion(focus=false){
+ const visible=visibleQuestions();current=Math.max(0,Math.min(current,visible.length-1));const q=visible[current];
+ $("axisText").textContent=q.axis;$("progressText").textContent=(current+1)+" من "+visible.length;
+ const progress=Math.round(current/visible.length*100);
+ $("progressBar").style.width=progress+"%";$("progressTrack").setAttribute("aria-valuenow",progress);
+ $("question").innerHTML='<h3 id="questionTitle" tabindex="-1">'+escapeHtml(q.text)+'</h3><p class="help" id="questionHelp">'+escapeHtml(q.help)+'</p><div class="options" role="group" aria-labelledby="questionTitle" aria-describedby="questionHelp">'+q.options.map(([value,label])=>'<button type="button" class="option '+(answers[q.id]===value?'selected':'')+'" aria-pressed="'+(answers[q.id]===value)+'" data-value="'+value+'"><span class="dot" aria-hidden="true"></span><span>'+escapeHtml(label)+'</span></button>').join("")+'</div>';
+ $("question").querySelectorAll(".option").forEach(btn=>btn.addEventListener("click",()=>{
+  answers[q.id]=btn.dataset.value;
+  if(q.id==="ownership"&&answers.ownership!=="family"){delete answers.familyRules;delete answers.familyTransition}
+  $("question").querySelectorAll(".option").forEach(b=>{const selected=b===btn;b.classList.toggle("selected",selected);b.setAttribute("aria-pressed",selected)});
+  $("nextBtn").disabled=false;
+  $("progressText").textContent=(current+1)+" من "+visibleQuestions().length;
+ }));
+ $("backBtn").disabled=current===0;$("nextBtn").disabled=!answers[q.id];
+ $("nextBtn").textContent=current===visible.length-1?"عرض النتيجة":"التالي";
+ if(focus)$("questionTitle").focus({preventScroll:true});
+}
+function recMarkup(recs){return recs.map((r,i)=>'<article class="rec"><div class="rec-top"><h3>'+String(i+1)+'. '+escapeHtml(r.title)+'</h3><span class="badge">'+r.priority+'</span></div><p><strong>سبب التوصية: </strong>'+escapeHtml(r.reason)+'</p><p class="step"><strong>ابدأ بهذه الخطوة: </strong>'+escapeHtml(r.action)+'</p><a class="source" href="'+SOURCES[r.source].url+'" target="_blank" rel="noopener">مرجع للمراجعة: '+SOURCES[r.source].name+' ↗</a></article>').join("")}
+function answerMarkup(){return visibleQuestions().map(q=>'<p><strong>'+escapeHtml(q.text)+'</strong><br>'+escapeHtml((q.options.find(o=>o[0]===answers[q.id])||[])[1]||"")+'</p>').join("")}
+function showResult(){
+ lastRecs=evaluate(answers);$("quiz").hidden=true;$("result").hidden=false;
+ $("recommendations").innerHTML=recMarkup(lastRecs);
+ $("resultSummary").textContent=lastRecs.length+" توصيات بحسب إجاباتك. ابدأ بالتحقق من المتطلبات، ثم رتب إجراءات التطوير مع فريقك.";
+ $("answersReview").innerHTML=answerMarkup();
+ const tools=[];
+ if(answers.ownership==="family")tools.push(["امتداد","تنظيم العلاقة بين العائلة والملكية","emtidad"]);
+ if(["formal","committees"].includes(answers.board))tools.push(["مقيّم مجالس","تقييم أداء المجلس القائم","majalis-evaluator"]);
+ if(lastRecs.some(r=>["board","auditCommittee","people"].includes(r.key)))tools.push(["مجالس","تنظيم الاجتماعات والمحاضر","majalis"]);
+ tools.push(["فحص صحة الحوكمة","مراجعة بقية جوانب الحوكمة","GovCheck"]);
+ $("resultTools").innerHTML='<h3>أدوات تساعدك على التنفيذ</h3><div class="tool-links">'+tools.map(t=>'<a class="tool-link" href="https://almohammdin.github.io/'+t[2]+'/" target="_blank" rel="noopener"><strong>'+t[0]+'</strong><br>'+t[1]+'</a>').join("")+'</div>';
+ $("exportStatus").textContent="";$("resultTitle").focus();$("assessment").scrollIntoView({block:"start"});
+}
+$("nextBtn").addEventListener("click",()=>{
+ if(!answers[visibleQuestions()[current].id])return;
+ if(current<visibleQuestions().length-1){current++;renderQuestion(true)}else showResult();
+});
+$("backBtn").addEventListener("click",()=>{if(current>0){current--;renderQuestion(true)}});
+$("editBtn").addEventListener("click",()=>{$("result").hidden=true;$("quiz").hidden=false;current=0;renderQuestion(true)});
+$("restartBtn").addEventListener("click",()=>{if(!confirm("بدء تقييم جديد ومسح إجابات الجلسة الحالية؟"))return;Object.keys(answers).forEach(k=>delete answers[k]);lastRecs=[];current=0;$("result").hidden=true;$("quiz").hidden=false;renderQuestion(true)});
+$("printBtn").addEventListener("click",()=>window.print());
+function reportHTML(){
+ const date=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Riyadh"}).format(new Date());
+ return '<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>بوصلة المجالس | تقرير التقييم</title><style>'+document.querySelector("style").textContent+' body{padding:25px}.report{max-width:900px;margin:auto}.report h1{font-size:34px}.report .rec{background:white;margin-top:15px}.report .wordmark{display:block;margin-bottom:25px}.report-answers{margin-top:30px}.report-answers p{font-size:15px;border-bottom:1px solid #ddd;padding:12px 0}@media print{body{padding:0}.report h1{font-size:25pt}}'+'</style><body><main class="report">'+document.querySelector(".wordmark").outerHTML+'<span class="eyebrow">حتى لحلول الأعمال · بوصلة المجالس</span><h1>تقرير احتياج المجلس واللجان والمشورة</h1><p>تاريخ التقرير: <bdi>'+date+'</bdi> · إصدار 3.0</p><p class="notice">تقدير أولي مبني على الإجابات. تعتمد الالتزامات بعد مراجعة الأنظمة واللوائح المنطبقة. يتضمن هذا الملف إجابات التقييم.</p>'+recMarkup(lastRecs)+'<section class="report-answers"><h2>الأسئلة والإجابات</h2>'+answerMarkup()+'</section><p class="notice">أعدت الأداة بواسطة نايف المحمدي · حتى لحلول الأعمال</p><p><a href="https://almohammdin.github.io/Board-Advisory-Mentorship/">فتح بوصلة المجالس</a></p></main></body></html>';
+}
+function downloadReport(){const blob=new Blob([reportHTML()],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="board-compass-report.html";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+$("downloadBtn").addEventListener("click",()=>{downloadReport();$("exportStatus").textContent="تم تجهيز التقرير للتنزيل. يشمل الأسئلة والإجابات والتوصيات."});
+$("shareBtn").addEventListener("click",async()=>{
+ try{
+ const file=new File([reportHTML()],"board-compass-report.html",{type:"text/html"});
+ if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:"تقرير بوصلة المجالس"});$("exportStatus").textContent="اكتملت مشاركة التقرير."}
+ else{downloadReport();$("exportStatus").textContent="تم تنزيل التقرير. أرفق الملف في تطبيق المشاركة الذي تستخدمه."}
+ }catch(e){if(e.name!=="AbortError"){$("exportStatus").textContent="تعذرت المشاركة. استخدم زر حفظ التقرير ثم أرفق الملف."}}
+});
+renderQuestion();
 
-      if(isListed){
-        addRec(recs,"board","مجلس إدارة نظامي","متطلب تنظيمي","required","تكوين المجلس ولجانه وفق نظام الشركات ولائحة حوكمة الشركات والنظام الأساس للمنشأة.");
-      } else if(answers.legal==="closed" || answers.ownership==="investors" || highComplexity){
-        addRec(recs,"board","مجلس فاعل بصلاحيات واضحة","توصية قوية","strong","هيكل مجلس منظم يدعم الرقابة والاستراتيجية ويحمي وضوح العلاقة بين الملكية والإدارة.");
-      } else if(!hasBoard){
-        addRec(recs,"board","تنظيم دور الملاك والإدارة","خيار تطويري","development","ابدأ باجتماعات منتظمة وصلاحيات موثقة، مع تطوير الهيكل كلما زاد التعقيد أو تعدد الملاك.");
-      }
-
-      if(isListed){
-        addRec(recs,"auditCommittee","لجنة مراجعة","متطلب تنظيمي","required","لجنة مستقلة عن التنفيذ تشرف على التقارير المالية والرقابة والمراجعة الداخلية والخارجية.");
-      } else if(isRegulated || financialRisk || highComplexity || answers.ownership==="investors"){
-        addRec(recs,"auditCommittee","لجنة مراجعة","توصية قوية","strong","الحاجة مرتفعة بسبب المخاطر أو التعقيد أو وجود أطراف خارج الإدارة.");
-      } else {
-        addRec(recs,"controls","تقوية الرقابة المالية","خيار تطويري","development","تحسين السياسات والفصل بين الصلاحيات والمتابعة قبل إنشاء لجنة مستقلة.");
-      }
-
-      if(isListed || isRegulated || financialRisk || highComplexity){
-        const mode = highComplexity || isListed ? "وظيفة مستقلة أو إسناد مشترك" : "إسناد خارجي مرن";
-        addRec(recs,"internalAudit","المراجعة الداخلية","توصية قوية","strong",`${mode} بخطة مبنية على المخاطر وارتباط وظيفي بلجنة المراجعة أو المجلس.`);
-      } else if(answers.audit==="none"){
-        addRec(recs,"internalAuditLater","مراجعة داخلية متناسبة","مرحلة لاحقة","later","يعاد تقييم الحاجة عند نمو العمليات أو التمويل أو تعدد الفروع.");
-      }
-
-      if(isListed){
-        const separate = answers.people==="complex" || successionPressure || highComplexity;
-        addRec(recs,"nomrem",separate?"لجنتا ترشيحات ومكافآت منفصلتان":"لجنة مكافآت وترشيحات مدمجة","متطلب تنظيمي","required",separate?"حجم الأعمال والتعاقب والمكافآت يبرران توزيع التركيز بين لجنتين.":"الدمج يحقق التناسب مع بقاء الاستقلال والاختصاص والجدول الدوري.");
-      } else if(["growing","complex","conflict"].includes(answers.people) || successionPressure || familyConcern){
-        const separate = answers.people==="complex" && highComplexity;
-        addRec(recs,"nomrem",separate?"فصل المكافآت عن الترشيحات":"لجنة مكافآت وترشيحات","توصية قوية","strong",separate?"تعقيد الحوافز والتعيينات يحتاج جدولين وخبرات أكثر تخصصاً.":"لضبط التعيين والتعاقب والمكافآت وتقليل تعارض المصالح.");
-      }
-
-      if((answers.regulated==="financial" && (financialRisk || highComplexity)) || (financialRisk && highComplexity)){
-        addRec(recs,"risk","لجنة مخاطر مستقلة","توصية قوية","strong","فصل المخاطر يخفف العبء عن لجنة المراجعة ويمنح المخاطر غير المالية وقتاً كافياً.");
-      }
-
-      if(answers.advice==="specialist"){
-        addRec(recs,"advisor","مستشار متخصص","خيار تطويري","development","خبرة مركزة في ملف محدد بعقد واضح ونطاق ومخرجات ومدة محددة.");
-      }
-      if(answers.advice==="advisory" || (answers.stage==="growth" && !hasBoard)){
-        addRec(recs,"advisory","مجلس استشاري","خيار تطويري","development","مجموعة خبرات تقدم رأياً غير ملزم، ويمكن أن تعمل بجانب المجلس أو كمرحلة تسبق احترافه.");
-      }
-      if(answers.advice==="mentor"){
-        addRec(recs,"mentor","مرشد للرئيس التنفيذي","خيار تطويري","development","مسار شخصي لتطوير القيادة والقرار، منفصل عن رقابة المجلس وصلاحياته.");
-      }
-
-      if(recs.length<4){
-        addRec(recs,"review","مراجعة الهيكل سنوياً","مرحلة لاحقة","later","يعاد فحص الحاجة إلى اللجان والمشورة عند دخول مستثمر أو ارتفاع المخاطر أو توسع النشاط.");
-      }
-
-      const titles = recs.slice(0,3).map(r=>r.title);
-      document.getElementById("resultTitle").textContent = titles.join(" + ");
-      document.getElementById("resultSummary").textContent = "الهيكل المقترح مركب بحسب وضع المنشأة، ويمكن تنفيذه تدريجياً مع التحقق من الأنظمة واللوائح الخاصة بقطاعها.";
-      document.getElementById("recommendations").innerHTML = recs.map(r=>`
-        <article class="recommendation">
-          <div class="recommendation-top">
-            <h4>${r.title}</h4>
-            <span class="status ${r.type}">${r.status}</span>
-          </div>
-          <p>${r.description}</p>
-        </article>`).join("");
-
-      const tools=[];
-      if(answers.ownership==="family"){
-        tools.push(["امتداد","حوكمة العلاقة بين العائلة والملكية والشركة","https://almohammdin.github.io/emtidad/"]);
-      }
-      if(hasBoard){
-        tools.push(["مقيّم مجالس","تقييم أداء المجلس واللجان القائمة","https://almohammdin.github.io/majalis-evaluator/"]);
-      }
-      if(recs.some(r=>["auditCommittee","nomrem","risk"].includes(r.key))){
-        tools.push(["مجالس","إدارة الاجتماعات والمحاضر والقرارات","https://almohammdin.github.io/majalis/"]);
-      }
-      if(answers.board==="informal" || answers.financial==="issues"){
-        tools.push(["فحص صحة الحوكمة","تشخيص الفجوات العامة في الحوكمة","https://almohammdin.github.io/GovCheck/"]);
-      }
-      const toolsBox=document.getElementById("resultTools");
-      if(tools.length){
-        toolsBox.innerHTML=`<div class="result-tools-title">أدوات مساندة قد تفيد في جانب متخصص من حالتك:</div><div class="tool-links">${tools.map(t=>`<a class="tool-link" href="${t[2]}" target="_blank" rel="noopener" title="${t[1]}">${t[0]}</a>`).join("")}</div>`;
-        toolsBox.style.display="block";
-      }else{
-        toolsBox.style.display="none";
-      }
-    }
-
-    nextBtn.addEventListener("click",()=>{
-      const visible=visibleQuestions();
-      if(current < visible.length-1){
-        current++;
-        renderQuestion();
-      }else{
-        buildResult();
-        document.getElementById("quiz").style.display="none";
-        document.getElementById("result").classList.add("show");
-      }
-    });
-    backBtn.addEventListener("click",()=>{
-      if(current>0){current--;renderQuestion();}
-    });
-    document.getElementById("restartBtn").addEventListener("click",()=>{
-      Object.keys(answers).forEach(k=>delete answers[k]);
-      current=0;
-      document.getElementById("result").classList.remove("show");
-      document.getElementById("quiz").style.display="block";
-      renderQuestion();
-    });
-    renderQuestion();
-  </script>
-</body>
-</html>
+</script></body></html>
